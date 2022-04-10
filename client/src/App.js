@@ -1,25 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main-container">
+    <h1>Client Webpage</h1>
+    <form>
+      <label>
+        <input type="text" id="input" placeholder="Input" />
+      </label>
+    </form>
+    <input type="submit" value="Submit input to server" onClick={DoSomething}/>
+    <p id="output"> Result from server</p>
     </div>
   );
+}
+
+function DoSomething(){
+  console.log('You clicked submit.');
 }
 
 export default App;
