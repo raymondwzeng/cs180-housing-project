@@ -9,14 +9,15 @@ function App() {
         <input type="text" id="input" placeholder="Input" />
       </label>
     </form>
-    <input type="submit" value="Submit input to server" onClick={DoSomething}/>
+    <input type="submit" value="Submit input to server" onClick={changeOutputText}/>
     <p id="output"> Result from server</p>
     </div>
   );
 }
 
-function DoSomething(){
-  console.log('You clicked submit.');
+function changeOutputText(){
+  var inputText = document.getElementById("input").value;
+  document.getElementById("output").innerText = inputText;
 }
 
 export default App;
