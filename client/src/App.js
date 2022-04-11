@@ -20,7 +20,21 @@ function App() {
 // Replace with a function that handles a POST request from the client
 function changeOutputText(){
   var inputText = document.getElementById("input").value;
+  postFunc('api/test', inputText);
   document.getElementById("output").innerText = inputText;
+}
+function postFunc(req, sendText){
+  fetch('http://localhost:4000/'+req,{
+    method: 'Post',
+    headers:{
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      firstParam:sendText
+    })
+  });
+  //return to be implement for handling info
 }
 
 export default App;
