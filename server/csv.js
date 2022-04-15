@@ -37,7 +37,7 @@ function load() {
         //TODO: Create a new object of class Neighborhood, based on the information, and add to table.
         //There's probably a non-Yandere-dev way to handle this, but perhaps that is for another time.
         //Note: Second condition is to eliminate the titles.
-        if(entryArray.length == 14 && Number(entryArray[1]) != NaN) {
+        if(entryArray.length == 14 && !isNaN(Number(entryArray[1]))) {
             const newEntry = {
                 median_value: entryArray[0],
                 median_income: entryArray[1],
@@ -59,3 +59,5 @@ function load() {
     })
     return neighborhoodsList //TODO: Only allow csv.js to manipulate the data. Basically, "close" the DB layer.
 }
+
+exports.load = load;
