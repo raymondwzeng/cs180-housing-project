@@ -18,23 +18,35 @@ function App() {
 
 // This is a placeholder function to test the button's functionality
 // Replace with a function that handles a POST request from the client
-function changeOutputText(){
+async function changeOutputText(){
   var inputText = document.getElementById("input").value;
-  postFunc('api/test', inputText);
-  document.getElementById("output").innerText = inputText;
+  let response = await postFunc('api/test', inputText);
+  document.getElementById("output").innerText = response;
 }
-function postFunc(req, sendText){
-  fetch('http://localhost:4000/'+req,{
-    method: 'Post',
-    headers:{
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      firstParam:sendText
+async function postFunc(req, sendText){
+  try {
+    let response = await fetch('http://localhost:4000/'+req,{
+      method: 'Post',
+      headers:{
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        firstParam:sendText
+      })
     })
-  });
-  //return to be implement for handling info
+
+  //turn the POST response into a json file, and return the firstParam
+  
+    let data = await response.json()
+    console.log(data.firstParam);
+    return data.firstParam;
+  }
+  catch(error) {
+    console.error("ERROR: No response from server. Please check if server is running.");
+    return "ERROR: No Response From Server";
+  }
+  
 }
 
 export default App;
