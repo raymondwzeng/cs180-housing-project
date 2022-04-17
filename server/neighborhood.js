@@ -129,4 +129,8 @@ class neighborhood{
              this._closest_metro=input;
          }
     }
+    avg_household_size(){
+        return population/households;
+    }
 }
+module.exports = neighborhood
