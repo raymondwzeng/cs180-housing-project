@@ -1,7 +1,7 @@
 const neighborhood = require('../neighborhood')
 const { expect } = require('chai')
 
-describe("Testing neighborhood class median value getter", () => {
+describe("Testing neighborhood class", () => {
     let data = new neighborhood([452600,8.3252,41,880,129,322,126,37.88,-122.23,9263.04077285038,556529.1583418,735501.80698384,67432.5170008434,21250.2137667799])
     it("Checking median_value getter, should read 452600", () => {
         expect(data.median_value).to.be.equal(452600)
@@ -38,7 +38,7 @@ describe("Testing neighborhood class median value getter", () => {
 
         expect(data.longitude).to.be.equal(-122.23);
     })
-    it("Testing neighborhood class distance to coase getter", () => {
+    it("Testing neighborhood class distance to coast getter", () => {
 
         expect(data.distance_to_coast).to.be.equal(9263.04077285038);
     })
@@ -64,7 +64,7 @@ describe("Testing neighborhood class median value getter", () => {
     })
     it("Testing neighborhood class avg_household_size", () => {
 
-        expect(data.median_income).to.be.equal(322/126);
+        expect(data.avg_household_size()).to.be.equal(322/126);
     }) 
     it("Checking median_value setter, should read 452000", () => {
         data.median_value=452000;
@@ -84,7 +84,7 @@ describe("Testing neighborhood class median value getter", () => {
     })
     it("Testing neighborhood class total bedrooms setter", () => {
         data.total_bedrooms=130;
-        expect(data.median_income).to.be.equal(130);
+        expect(data.total_bedrooms).to.be.equal(130);
     })
     it("Testing neighborhood class population setter", () => {
         data.population=320;
@@ -119,7 +119,7 @@ describe("Testing neighborhood class median value getter", () => {
         expect(data.distance_to_SJ).to.be.equal(5002);
     })
     it("Testing neighborhood class distance to sf setter", () => {
-        data.distance_to_SF=50003;
+        data.distance_to_SF=5003;
         expect(data.distance_to_SF).to.be.equal(5003);
     })
     it("Testing neighborhood class closest metro getter after distance setter", () => {

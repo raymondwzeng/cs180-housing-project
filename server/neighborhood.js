@@ -14,16 +14,16 @@ class neighborhood{
         this.distance_to_SD=info[11];
         this.distance_to_SJ=info[12];
         this.distance_to_SF=info[13];
-        if(info[10]>info[11]&&info[10]>info[12]&&info[10]>info[13]){
+        if(info[10]<info[11]&&info[10]<info[12]&&info[10]<info[13]){
             this._closest_metro="Los Angeles";
         }
-        else if(info[11]>info[10]&&info[11]>info[12]&&info[11]>info[13]){
+        else if(info[11]<info[10]&&info[11]<info[12]&&info[11]<info[13]){
             this._closest_metro="San Diego";
         }
-        else if(info[12]>info[11]&&info[12]>info[10]&&info[12]>info[13]){
+        else if(info[12]<info[11]&&info[12]<info[10]&&info[12]<info[13]){
             this._closest_metro="San Jose";
         }
-        else if(info[13]>info[11]&&info[13]>info[12]&&info[13]>info[10]){
+        else if(info[13]<info[11]&&info[13]<info[12]&&info[13]<info[10]){
             this._closest_metro="San Francisco";
         }
         else{
@@ -75,6 +75,24 @@ class neighborhood{
     get closest_metro(){
         return this._closest_metro;
     }
+    closest_metro_distance(){
+        if(this.closest_metro==="Los Angeles")return this._distance_to_LA;
+        else if(this.closest_metro==="San Diego")return this._distance_to_SD;
+        else if(this.closest_metro==="San Jose")return this._distance_to_SJ;
+        else if(this.closest_metro==="San Francisco")return this._distance_to_SF;
+        else{
+            if(this._distance_to_LA>=this._distance_to_SD&&this._distance_to_LA>=this._distance_to_SJ&&this._distance_to_LA>=this._distance_to_SF){
+                return this._distance_to_LA;
+            }
+            else if(this._distance_to_SD>=this._distance_to_SJ&&this._distance_to_SD>=this._distance_to_SF){
+                return this._distance_to_SD;
+            }
+            else if(this._distance_to_SF>=this._distance_to_SD&&this._distance_to_SF>=this._distance_to_SJ){
+                return this._distance_to_SF;
+            }
+            else return this._distance_to_SJ;
+        }
+    }
     set median_value(input){
         this._median_value=input;
     }
@@ -107,30 +125,30 @@ class neighborhood{
     }
     set distance_to_LA(input){
          this._distance_to_LA=input;
-         if(input<this.closest_metro){
-             this._closest_metro=input;
+         if(input<this.closest_metro_distance()){
+             this._closest_metro="Los Angeles";
          }
     }
     set distance_to_SD(input){
          this._distance_to_SD=input;
-         if(input<this.closest_metro){
-             this._closest_metro=input;
+         if(input<this.closest_metro_distance()){
+             this._closest_metro="San Diego";
          }
     }
     set distance_to_SF(input){
          this._distance_to_SF=input;
-         if(input<this.closest_metro){
-             this._closest_metro=input;
+         if(input<this.closest_metro_distance()){
+             this._closest_metro="San Francisco";
          }
     }
     set distance_to_SJ(input){
          this._distance_to_SJ=input;
-         if(input<this.closest_metro){
-             this._closest_metro=input;
+         if(input<this.closest_metro_distance()){
+             this._closest_metro="San Jose";
          }
     }
     avg_household_size(){
-        return population/households;
+        return (this.population/this.households);
     }
 }
 module.exports = neighborhood
