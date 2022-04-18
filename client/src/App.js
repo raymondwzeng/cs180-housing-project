@@ -14,10 +14,6 @@ function App() {
   const [latitude, setLatitude] = useState([minLatitudeLongitude, maxLatitudeLongitude])
   const [longitude, setLongitude] = useState([minLatitudeLongitude, maxLatitudeLongitude])
 
-  // function displayFilteredData() {
-  //   displayFilteredDataAsync(medianHousePrice, latitude, longitude)
-  // }
-
   // Barebones HTML for the webpage
   return (
     <div className="page-contents">
@@ -43,6 +39,7 @@ function App() {
   );
 }
 
+//TODO: Probably move this into its own JS file (along with the state stuff) and pass things in as props instead.
 // Returns a Slider with two thumbs
 function TwoSidedSlider(props) {
   return (
