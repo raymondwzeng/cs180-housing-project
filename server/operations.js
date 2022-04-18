@@ -15,4 +15,6 @@ function getNeighborhoodList() {
 	return csv.load();
 }
 
+//TODO: Add CRUD operators to modify individual rows in the neighborhoodList
+
 exports.getNeighborhoodList = getNeighborhoodList;
