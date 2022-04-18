@@ -1,27 +1,43 @@
 import './App.css';
 import './Slider.css'
 import ReactSlider from 'react-slider'
+import {useState} from 'react'
+
+const minMedianHousePrice = 0
+const maxMedianHousePrice = 500000
+const minLatitudeLongitude = -150
+const maxLatitudeLongitude = 150
 
 function App() {
+  //TODO: Move this (and related slider logic) into its own js file for clarity.
+  const [medianHousePrice, setMedianHousePrice] = useState([minMedianHousePrice, maxMedianHousePrice])
+  const [latitude, setLatitude] = useState([minLatitudeLongitude, maxLatitudeLongitude])
+  const [longitude, setLongitude] = useState([minLatitudeLongitude, maxLatitudeLongitude])
+
+  // function displayFilteredData() {
+  //   displayFilteredDataAsync(medianHousePrice, latitude, longitude)
+  // }
+
   // Barebones HTML for the webpage
   return (
     <div className="page-contents">
       <h1>1990 Housing Data Viewer</h1>
-      <div className='test'>10</div>
+      <div className='test'>Min:{latitude[0]}, Max:{latitude[1]}</div>
       {/* Two Sided Sliders for all of the data values*/}
       <div className="slider">
         <div className="slider-text">Median House Price</div>
-        <TwoSidedSlider className="median-slider" min={0} max={100}/>
+        <TwoSidedSlider className="median-slider" min={minMedianHousePrice} max={maxMedianHousePrice} onChange={(medianHousePrice, _) => setMedianHousePrice(medianHousePrice)}/>
       </div>
       <div className="slider">
         <div className="slider-text">Latitude</div>
-        <TwoSidedSlider className="latitude-slider" min={0} max={100}/>
+        <TwoSidedSlider className="latitude-slider" min={minLatitudeLongitude} max={maxLatitudeLongitude} onChange={(latitude, _) => setLatitude(latitude)}/>
       </div>
       <div className="slider">
         <div className="slider-text">Longitude</div>
-        <TwoSidedSlider className="longitude-slider" min={0} max={100}/>
+        <TwoSidedSlider className="longitude-slider" min={minLatitudeLongitude} max={maxLatitudeLongitude} onChange={(longitude, _) => setLongitude(longitude)}/>
       </div>
-      <input className="button" type="submit" value="Show all data" onClick={displayAllData}/>
+      <input className="button" type="submit" value="Show all data" onClick={fetchAllData}/>
+      <input className="button" type="submit" value="Show filtered data" onClick={() => fetchFilteredData(medianHousePrice, latitude, longitude)}/>
       <p id="output"> Result from server</p>
     </div>
   );
@@ -38,10 +54,12 @@ function TwoSidedSlider(props) {
         defaultValue={[props.min, props.max]}
         min={props.min}
         max={props.max}
+        value ={props.valueNow}
         ariaLabel={['Lower thumb', 'Upper thumb']}    // aria text for screen readers
         ariaValuetext={state => `Thumb value ${state.valueNow}`}
         renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
         pearling
+        onChange={props.onChange}
         // onAfterChange={(value, index) =>
         //   console.log(`onAfterChange: ${JSON.stringify({ value, index })}`)
         // }
@@ -66,9 +84,35 @@ async function changeOutputText(){
   document.getElementById("output").innerText = response;
 }
 
-async function displayAllData() {
-  let response = await postFunc('api/neighborhoodList', "test");
-  //console.log(response);
+async function fetchAllData() {
+  displayAllData(await postFunc('api/neighborhoodList', "test"))
+}
+
+async function fetchFilteredData(medianHousePrice, latitude, longitude) {
+  fetch('http://localhost:4000/api/getFilteredData', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      minMedianHousePrice: medianHousePrice[0],
+      maxMedianHousePrice: medianHousePrice[1],
+      minLatitude: latitude[0],
+      maxLatitude: latitude[1],
+      minLongitude: longitude[0],
+      maxLongitude: longitude[1]
+    })
+  }).then(response => response.json())
+  .then(response => {
+    console.log(response)
+    displayAllData(response)
+  })
+}
+
+async function displayAllData(response) {
+  // let response = await postFunc('api/neighborhoodList', "test");
+  console.log(response);
   //document.getElementById("output").innerText = response;
 
   var mainContainer = document.getElementById("output");
