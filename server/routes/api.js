@@ -27,4 +27,11 @@ router.get('/latitudeLongitudeRange', (req, res) => {
     res.json(analytics.getLatitudeLongitudeRange(req.body[0], req.body[1], req.body[2], req.body[3]));
 })
 
+router.post('/getFilteredData', (req, res) => {
+    // console.log(req.body)
+    let result = JSON.parse(JSON.stringify(analytics.filterByAll(req.body)))
+    console.log(result)
+    res.json(result)
+})
+
 module.exports = router
