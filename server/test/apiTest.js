@@ -1,4 +1,5 @@
 const chai = require("chai")
+const csv = require('../csv')
 const { expect, assert } = require("chai")
 const chaiHttp = require("chai-http")
 
@@ -21,6 +22,17 @@ describe("Testing API calls", () => {
                   expect(err).to.be.null
                   expect(res).to.be.json
                   assert.deepEqual(res.body, dummyData)
+              })
+    })
+    it("Should receive the full neighborhoodList array after GET to /api/neighborhoodList", () => {
+	    const csvNeighborhoodList = csv.load();
+
+        chai.request("http://localhost:4000")
+            .get("/api/neighborhoodList")
+            .send().end((err, res) => {
+                  expect(err).to.be.null
+                  //expect(res).to.be.json
+                  expect(res.body).to.eql(csvNeighborhoodList); //deep equality assertion
               })
     })
 })
