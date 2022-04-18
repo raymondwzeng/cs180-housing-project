@@ -21,8 +21,13 @@ function App() {
 function changeOutputText(){
   var inputText = document.getElementById("input").value;
   postFunc('api/test', inputText);
+  localStorage.setItem("text", inputText);  // saves the item
   document.getElementById("output").innerText = inputText;
 }
+// function retrieve(){
+//   var text=localStorage.getItem("text");  // retrieve
+//   document.getElementById('testDiv').innerHTML = text;  // display
+// }
 function postFunc(req, sendText){
   fetch('http://localhost:4000/'+req,{
     method: 'Post',
@@ -33,8 +38,17 @@ function postFunc(req, sendText){
     body: JSON.stringify({
       firstParam:sendText
     })
-  });
+
+  }
+  // fetch('http://localhost:4000/'')
+  // .then(response => response.json())
+  // .then(data => console.log(data));
+  
+  
+  );
   //return to be implement for handling info
+  //retrieve();
+  // console.log(response.resolve().json().body);
 }
 
 export default App;
