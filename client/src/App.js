@@ -65,11 +65,27 @@ function changeOutputText(){
 
   postFunc('api/test', medianMin);
   document.getElementById("output").innerText = medianMin;
+
+  
 }
 
 function postFunc(req, sendText){
   fetch('http://localhost:4000/'+req,{
     method: 'Post',
+    headers:{
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      firstParam:sendText
+    })
+  });
+  //return to be implement for handling info
+}
+
+function getFunc(req, sendText){
+  fetch('http://localhost:4000/'+req,{
+    method: 'Get',
     headers:{
       Accept: 'application/json',
       'Content-Type': 'application/json'
