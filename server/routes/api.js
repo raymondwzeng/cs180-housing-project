@@ -9,9 +9,12 @@ router.post('/test', (req, res) => {
     res.json(req.body)
 })
 
-router.get('/neighborhoodList', (req, res) => {
+router.post('/neighborhoodList', (req, res) => {
+    console.log(req.body)
+    var jsonString = JSON.stringify(operations.getNeighborhoodList());
+    var jsonParse = JSON.parse(jsonString)
     //console.log(req.body)
-    res.send(operations.getNeighborhoodList());
+    res.json(jsonParse);
 })
 
 router.get('/medianValueRange', (req, res) => {
