@@ -9,12 +9,17 @@ const maxMedianHousePrice = 500000
 const minLatitudeLongitude = -150
 const maxLatitudeLongitude = 150
 
-let cardContainer = []
+let setCardContainerOuter
+
+fetchAllData() //Display data on initial run
 
 function App() {
   const [medianHousePrice, setMedianHousePrice] = useState([minMedianHousePrice, maxMedianHousePrice])
   const [latitude, setLatitude] = useState([minLatitudeLongitude, maxLatitudeLongitude])
   const [longitude, setLongitude] = useState([minLatitudeLongitude, maxLatitudeLongitude])
+  const [cardContainer, setCardContainer] = useState([])
+
+  setCardContainerOuter = setCardContainer //Pass the method outside so that other functions in the file can control the state
 
   // Barebones HTML for the webpage
   return (
@@ -82,13 +87,14 @@ async function displayAllData(response) {
   div.innerHTML = 'ID|Median Value|Median Income|Median Age|Total Rooms|Total Bedrooms|Population|Households|Latitude|Longitude|Dist to Coast|LA Dist|SD Dist|SF Dist|SJ DIst|Closest Metro'
   mainContainer.appendChild(div);
 
-  cardContainer = []; //Empty out the cardContainer before injecting new data
+  let tempCardContainer = []; //Empty out the cardContainer before injecting new data
 
   for (var i = 0; i < response.length; i++) {
     response[i].key = i
     const newCard = Card(response[i])
-    cardContainer.push(newCard)
+    tempCardContainer.push(newCard)
   }
+  setCardContainerOuter(tempCardContainer)
 }
 
 async function postFunc(req, sendText){

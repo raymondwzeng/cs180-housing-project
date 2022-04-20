@@ -5,8 +5,12 @@
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  width: 600px;
+  width: 100%;
   margin: 70px auto;
+}
+
+#card-container {
+  width: 50%;
 }
 
 #input{
