@@ -1,8 +1,7 @@
 .slider {
   display: flex;
   flex-direction: row;
-  margin-left: auto; 
-  margin-right: 0;
+  width: 50%;
 }
 
 .slider-text {
