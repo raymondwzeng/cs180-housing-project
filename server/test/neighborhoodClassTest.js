@@ -66,6 +66,10 @@ describe("Testing neighborhood class", () => {
 
         expect(data.avg_household_size()).to.be.equal(322/126);
     }) 
+    it("Testing id getter", () => {
+        let id=452600+8.3252+41+880+129+322+126+37.88+(-122.23)+9263.04077285038;
+        expect(data.id).to.be.equal(id);
+    })  
     it("Checking median_value setter, should read 452000", () => {
         data.median_value=452000;
         expect(data.median_value).to.be.equal(452000);
