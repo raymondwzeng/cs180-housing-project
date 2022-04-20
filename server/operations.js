@@ -5,6 +5,7 @@ File that stores neighborhoodList in memory. Performs all CRUD operations on nei
 */
 
 const csv = require('./csv')
+let neighborhoodList = []
 
 let isLoaded = false
 let neighborhoodList = []

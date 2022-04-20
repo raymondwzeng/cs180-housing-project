@@ -1,12 +1,28 @@
 /* TODO Add all your css styling here */
 
-.main-container{
+.page-contents{
   display: flex;
-  flex: 1;
   align-items: center;
+  justify-content: space-between;
   flex-direction: column;
+  width: 600px;
+  margin: 70px auto;
 }
 
 #input{
   margin-bottom: 5px;
+}
+
+#output {
+  display: flex;
+  align-items: left;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 1300px;
+}
+
+.button {
+  justify-content: space-between;
+  height:30px;
+  width:200px;
 }
