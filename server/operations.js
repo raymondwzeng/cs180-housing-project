@@ -20,8 +20,6 @@ class OperationsLayer {
 
 	/*
 	Function to get the entire NeighborhoodList array from the csv.
-	TODO(?): Figure out a way to store the neighborhoodList in memory so that we don't have to parse the csv file
-		every time we want to access data. load() function doesn't take that much time, so might not be worth the effort.
 	*/
 	static getNeighborhoodList() {
 		return neighborhoodList
