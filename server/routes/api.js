@@ -1,5 +1,5 @@
 const express = require('express');
-const operations = require('../operations');
+const { OperationsLayer } = require('../operations')
 const analytics = require('../analytics');
 const router = express.Router()
 
@@ -11,7 +11,7 @@ router.post('/test', (req, res) => {
 
 router.get('/neighborhoodList', (req, res) => {
     //console.log(req.body)
-    res.send(operations.getNeighborhoodList());
+    res.send(new OperationsLayer());
 })
 
 router.get('/medianValueRange', (req, res) => {

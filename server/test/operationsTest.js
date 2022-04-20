@@ -1,15 +1,10 @@
-const operations = require('../operations');
 const csv = require('../csv');
 const { expect } = require('chai');
+const { OperationsLayer } = require('../operations');
 
 describe("operations.getNeighborhoodList function", () => {
-	const operationsNeighborhoodList = operations.getNeighborhoodList();
-	const csvNeighborhoodList = csv.load();
+	const operationsNeighborhoodList = new OperationsLayer();
 
-	//operationsNeighborhoodList should be identical to the one returned by the load() function
-	it("Should return an exact copy of the csv neighborhoodList", () => {
-        expect(operationsNeighborhoodList).to.eql(csvNeighborhoodList); //deep equality assertion
-    })
     it("Should read in exactly 20640 rows", () => {
         expect(operationsNeighborhoodList.length).to.be.equal(20640);
     })

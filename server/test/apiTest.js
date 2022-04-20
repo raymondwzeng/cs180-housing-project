@@ -2,6 +2,7 @@ const chai = require("chai")
 const csv = require('../csv')
 const { expect, assert } = require("chai")
 const chaiHttp = require("chai-http")
+const { OperationsLayer } = require("../operations")
 
 chai.use(require('chai-json'))
 chai.use(chaiHttp)
@@ -25,7 +26,7 @@ describe("Testing API calls", () => {
               })
     })
     it("Should receive the full neighborhoodList array after GET to /api/neighborhoodList", () => {
-	    const csvNeighborhoodList = csv.load();
+	    const csvNeighborhoodList = new OperationsLayer()
 
         chai.request("http://localhost:4000")
             .get("/api/neighborhoodList")
