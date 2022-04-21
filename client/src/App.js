@@ -1,8 +1,8 @@
 import './App.css';
 import './Slider.css'
-import TwoSidedSlider from './TwoSidedSlider';
+import TwoSidedSlider from './components/TwoSidedSlider';
 import {useState} from 'react'
-import Card from './Card';
+import Card from './components/Card';
 
 const minMedianHousePrice = 0
 const maxMedianHousePrice = 500000
