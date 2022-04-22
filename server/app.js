@@ -2,7 +2,8 @@ var express = require('express');
 
 var api = require('./routes/api')
 var bodyParser = require('body-parser')
-var cors = require('cors')
+var cors = require('cors');
+const { OperationsLayer } = require('./operations');
 
 var app = express();
 const PORT = 4000;
@@ -17,6 +18,7 @@ app.get('/', (req, res) => {
 })
 
 app.listen(PORT, () => {
+  new OperationsLayer()
   console.log("Listening...")
 })
 

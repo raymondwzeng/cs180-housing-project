@@ -1,5 +1,5 @@
 const express = require('express');
-const operations = require('../operations');
+const { OperationsLayer } = require('../operations')
 const analytics = require('../analytics');
 const router = express.Router()
 
@@ -11,7 +11,7 @@ router.post('/test', (req, res) => {
 
 router.post('/neighborhoodList', (req, res) => {
     console.log(req.body)
-    var jsonString = JSON.stringify(operations.getNeighborhoodList());
+    var jsonString = JSON.stringify(new OperationsLayer());
     var jsonParse = JSON.parse(jsonString)
     //console.log(req.body)
     res.json(jsonParse);
