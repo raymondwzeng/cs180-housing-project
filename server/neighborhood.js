@@ -1,3 +1,4 @@
+    let id_count=0;
     class neighborhood{
     constructor(info){
         this.median_value=info[0];
@@ -14,7 +15,11 @@
         this.distance_to_SD=info[11];
         this.distance_to_SJ=info[12];
         this.distance_to_SF=info[13];
-        this.id=this.median_age+this.median_income+this.median_value+this.households+this.latitude+this.longitude+this.population+this.total_bedrooms+this.total_rooms+this.distance_to_coast;
+        // const idC=id_count++;
+        this.id=id_count++;
+        // console.log(idC);
+        // this.id=this.median_age+this.median_income+this.median_value+this.households+this.latitude+this.longitude+this.population+this.total_bedrooms+this.total_rooms+this.distance_to_coast;
+        // console.log(this.id);
         if(info[10]<info[11]&&info[10]<info[12]&&info[10]<info[13]){
             this._closest_metro="Los Angeles";
         }
@@ -152,7 +157,9 @@
          }
     }
     set id(input){
-        this._id=this.median_age+this.median_income+this.median_value+this._distance_to_coast+this._households+this._latitude+this.longitude+this._population+this._total_bedrooms+this._total_rooms;
+        // this._id=this.median_age+this.median_income+this.median_value+this._distance_to_coast+this._households+this._latitude+this.longitude+this._population+this._total_bedrooms+this._total_rooms;
+        if(this._id===undefined)
+        this._id=input;
     }
     avg_household_size(){
         return (this.population/this.households);
