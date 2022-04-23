@@ -1,8 +1,9 @@
 const csv = require('../csv')
 const { expect } = require('chai')
+const { OperationsLayer } = require('../operations')
 
 describe("CSV loading and reading", () => {
-    const data = csv.load()
+    const data = new OperationsLayer()
     it("Should read in exactly 20640 rows", () => {
         expect(data.length).to.be.equal(20640)
     })
