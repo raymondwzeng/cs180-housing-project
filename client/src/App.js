@@ -64,7 +64,7 @@ function TwoSidedSlider(props) {
       />
   );
 }
-
+/*
 // This is a placeholder function to test the button's functionality
 // Replace with a function that handles a POST request from the client
 async function changeOutputText(){
@@ -80,7 +80,7 @@ async function changeOutputText(){
   let response = await postFunc('api/test', medianMin);
   document.getElementById("output").innerText = response;
 }
-
+*/
 async function fetchAllData() {
   displayAllData(await postFunc('api/neighborhoodList', "test"))
 }
