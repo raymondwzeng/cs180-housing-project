@@ -17,20 +17,10 @@ router.post('/neighborhoodList', (req, res) => {
     res.json(jsonParse);
 })
 
-router.get('/medianValueRange', (req, res) => {
-    console.log(req.body)
-    res.json(analytics.getMedianValueRange(req.body[0], req.body[1]));
-})
-
-router.get('/latitudeLongitudeRange', (req, res) => {
-    console.log(req.body)
-    res.json(analytics.getLatitudeLongitudeRange(req.body[0], req.body[1], req.body[2], req.body[3]));
-})
-
 router.post('/getFilteredData', (req, res) => {
-    // console.log(req.body)
+    console.log(req.body)
     let result = JSON.parse(JSON.stringify(analytics.filterByAll(req.body)))
-    console.log(result)
+    //console.log(result)
     res.json(result)
 })
 
