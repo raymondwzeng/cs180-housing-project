@@ -2,7 +2,7 @@ const neighborhood = require('../neighborhood')
 const { expect } = require('chai')
 
 describe("Testing neighborhood class", () => {
-    let data = new neighborhood([452600,8.3252,41,880,129,322,126,37.88,-122.23,9263.04077285038,556529.1583418,735501.80698384,67432.5170008434,21250.2137667799])
+    let data = new neighborhood([452600,8.3252,41,880,129,322,126,37.88,-122.23,9263.04077285038,556529.1583418,735501.80698384,67432.5170008434,21250.2137667799,1])
     it("Checking median_value getter, should read 452600", () => {
         expect(data.median_value).to.be.equal(452600)
     })
@@ -61,6 +61,9 @@ describe("Testing neighborhood class", () => {
     it("Testing neighborhood class closest metro getter", () => {
 
         expect(data.closest_metro).to.be.equal("San Francisco");
+    })
+    it("Test neighborhood class id getter", () => {
+        expect(data.id).to.be.equal(1);
     })
     it("Testing neighborhood class avg_household_size", () => {
 
@@ -126,5 +129,8 @@ describe("Testing neighborhood class", () => {
         data.distance_to_LA=10;
         expect(data.closest_metro).to.be.equal("Los Angeles");
     })
-    
+    it("Testing neighborhood class id setter", () => {
+        data.id=2;
+        expect(data.id).to.be.equal(2);
+    })    
 })

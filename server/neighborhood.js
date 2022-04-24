@@ -14,6 +14,7 @@ class neighborhood{
         this.distance_to_SD=info[11];
         this.distance_to_SJ=info[12];
         this.distance_to_SF=info[13];
+        this.id=info[14];
         if(info[10]<info[11]&&info[10]<info[12]&&info[10]<info[13]){
             this._closest_metro="Los Angeles";
         }
@@ -74,6 +75,9 @@ class neighborhood{
     }
     get closest_metro(){
         return this._closest_metro;
+    }
+    get id(){
+        return this._id;
     }
     closest_metro_distance(){
         if(this.closest_metro==="Los Angeles")return this._distance_to_LA;
@@ -146,6 +150,9 @@ class neighborhood{
          if(input<this.closest_metro_distance()){
              this._closest_metro="San Jose";
          }
+    }
+    set id(input){
+        this._id=input;
     }
     avg_household_size(){
         return (this.population/this.households);

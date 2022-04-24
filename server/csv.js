@@ -35,7 +35,7 @@ function load() {
     }).split('\r\n').forEach( entry => {
         const entryArray = entry.split(',')
         //Note: Second condition is to eliminate the titles.
-        if(entryArray.length == 14 && !isNaN(Number(entryArray[1]))) {
+        if(entryArray.length == 15 && !isNaN(Number(entryArray[1]))) {
             const newNeighborhood = new Neighborhood(entryArray)
             neighborhoodsList.push(newNeighborhood)
         }
