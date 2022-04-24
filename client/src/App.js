@@ -54,6 +54,16 @@ async function fetchAllData() {
   displayAllData(await postFunc('api/neighborhoodList', "api/neighborhoodList called"))
 }
 
+function updateData(entryId, entryState) {
+  console.log("Entry", entryId, "updated with", entryState)
+  //TODO: Send a POST request to the api containing the id and the new data.
+}
+
+function deleteEntry(entryId) {
+  console.log("Entry", entryId, "removed")
+  //TODO: Send a DELETE request to the api containing the id to remove.
+}
+
 async function fetchFilteredData(medianHousePrice, latitude, longitude) {
   fetch('http://localhost:4000/api/getFilteredData', {
     method: 'POST',
@@ -87,7 +97,7 @@ async function displayAllData(response) {
   for (var i = 0; i < response.length; i++) {
     //TODO: Add support for ID property here
     response[i].key = i
-    const newCard = <Card {...response[i]}/>
+    const newCard = <Card {...response[i]} updateData={updateData} deleteEntry={deleteEntry}/>
     tempCardContainer.push(newCard)
   }
   setCardContainerOuter(tempCardContainer)

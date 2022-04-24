@@ -82,6 +82,10 @@ class Card extends Component {
                     <EditText id="distance_to_SJ" name="Distance to SJ" value={this.state._distance_to_SJ} onChange={(e) => this.changeValue("_distance_to_SJ", e.target.value)}></EditText>
                     <EditText id="distance_to_SF" name="Distance to SF" value={this.state._distance_to_SF} onChange={(e) => this.changeValue("_distance_to_SF", e.target.value)}></EditText>
                 </div>
+                <div id='options-div'>
+                        <button onClick={() => this.props.updateData(this.props.id, this.state)}>Update data</button>
+                        <button onClick={() => this.props.deleteEntry(this.props.id)}>Delete entry</button>
+                </div>
             </div>
         </div>
     }
