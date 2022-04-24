@@ -8,6 +8,11 @@ const maxMedianHousePrice = 500000
 const minLatitudeLongitude = -150
 const maxLatitudeLongitude = 150
 
+const defaultHeaders = {
+  'Accept': 'application/json',
+  'Content-Type': 'application/json'
+}
+
 let setCardContainerOuter
 
 fetchAllData() //Display data on initial run
@@ -44,7 +49,9 @@ function App() {
       <p id="output"> Result from server</p>
       <div id='card-container'>
         <div id='header'/>
-        {cardContainer}
+        {cardContainer.map(element => {
+          return <Card {...element} updateData={updateData} deleteEntry={deleteEntry}/>
+        })}
       </div>
     </div>
   );
@@ -54,23 +61,45 @@ async function fetchAllData() {
   displayAllData(await postFunc('api/neighborhoodList', "api/neighborhoodList called"))
 }
 
-function updateData(entryId, entryState) {
+/**
+ * Updates the data on the server side, specifically /api/cards, with a PATCH request.
+ * @param {string} entryId - The id of the element you wish to update.
+ * @param {Object} entryState - The JSONified state of the element. You do not need to remove the 'isEditMode' property.
+ */
+async function updateData(entryId, entryState) {
+  delete entryState['isEditMode'] //Safe delete, remove unused state
   console.log("Entry", entryId, "updated with", entryState)
-  //TODO: Send a POST request to the api containing the id and the new data.
+  await fetch('http://localhost:4000/api/cards', {
+    method: 'PATCH',
+    headers: defaultHeaders,
+    body: JSON.stringify({
+      id: entryId,
+      state: entryState
+    })})
+    .then(response => response.json())
+    .then(responseJSON => console.log(responseJSON)) //TODO: Change the existing set of data on the client to the one returned by the server.
 }
 
-function deleteEntry(entryId) {
+/**
+ * Sends a DELETE request to /api/cards with the id of entry to remove.
+ * @param {string} entryId - The ID of the element you wish to remove.
+ */
+async function deleteEntry(entryId) {
   console.log("Entry", entryId, "removed")
-  //TODO: Send a DELETE request to the api containing the id to remove.
+  await fetch('http://localhost:4000/api/cards', {
+    method: 'DELETE',
+    headers: defaultHeaders,
+    body: JSON.stringify({
+      id: entryId
+    })
+  }).then(response => response.json())
+  .then(responseJSON => console.log(responseJSON)) //TODO: Change the existing set of data on the client to the one returned by the server. 
 }
 
 async function fetchFilteredData(medianHousePrice, latitude, longitude) {
   fetch('http://localhost:4000/api/getFilteredData', {
     method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
+    headers: defaultHeaders,
     body: JSON.stringify({
       minMedianHousePrice: medianHousePrice[0],
       maxMedianHousePrice: medianHousePrice[1],
@@ -96,9 +125,8 @@ async function displayAllData(response) {
 
   for (var i = 0; i < response.length; i++) {
     //TODO: Add support for ID property here
-    response[i].key = i
-    const newCard = <Card {...response[i]} updateData={updateData} deleteEntry={deleteEntry}/>
-    tempCardContainer.push(newCard)
+    response[i].key = response[i].id
+    tempCardContainer.push(response[i])
   }
   setCardContainerOuter(tempCardContainer)
 }
@@ -106,11 +134,8 @@ async function displayAllData(response) {
 async function postFunc(req, sendText){
   try {
     let response = await fetch('http://localhost:4000/'+req,{
-      method: 'Post',
-      headers:{
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
+      method: 'POST',
+      headers: defaultHeaders,
       body: JSON.stringify({
         firstParam:sendText
       })

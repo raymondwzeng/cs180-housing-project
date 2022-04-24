@@ -27,7 +27,6 @@ class Card extends Component {
             _distance_to_SF: props._distance_to_SF,
             _distance_to_SJ: props._distance_to_SJ
         }
-        console.log(props)
         this.toggleState = this.toggleState.bind(this) //Bind the state, allowing toggleState to actually interact with the component's state
         this.changeValue = this.changeValue.bind(this)
     }
@@ -83,8 +82,8 @@ class Card extends Component {
                     <EditText id="distance_to_SF" name="Distance to SF" value={this.state._distance_to_SF} onChange={(e) => this.changeValue("_distance_to_SF", e.target.value)}></EditText>
                 </div>
                 <div id='options-div'>
-                        <button onClick={() => this.props.updateData(this.props.id, this.state)}>Update data</button>
-                        <button onClick={() => this.props.deleteEntry(this.props.id)}>Delete entry</button>
+                        <button onClick={() => this.props.updateData(this.props._id, this.state)}>Update data</button>
+                        <button onClick={() => this.props.deleteEntry(this.props._id)}>Delete entry</button>
                 </div>
             </div>
         </div>
