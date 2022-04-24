@@ -7,7 +7,7 @@ export default function EditText(props) {
     return(
         <div>
             <label htmlFor={props.id}>{props.name}: </label>
-            <input id={props.id} type="number" value={props.value}/>
+            <input id={props.id} type="number" value={props.value} onChange={props.onChange}/>
         </div>
     )
 }
