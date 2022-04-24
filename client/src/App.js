@@ -1,5 +1,4 @@
 import './App.css';
-import './Slider.css'
 import TwoSidedSlider from './components/TwoSidedSlider';
 import {useState} from 'react'
 import Card from './components/Card';
