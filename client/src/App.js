@@ -82,7 +82,7 @@ async function changeOutputText(){
 }
 */
 async function fetchAllData() {
-  displayAllData(await postFunc('api/neighborhoodList', "test"))
+  displayAllData(await postFunc('api/neighborhoodList', "api/neighborhoodList called"))
 }
 
 async function fetchFilteredData(medianHousePrice, latitude, longitude) {

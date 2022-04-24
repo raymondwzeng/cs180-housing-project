@@ -18,9 +18,9 @@ router.post('/neighborhoodList', (req, res) => {
 })
 
 router.post('/getFilteredData', (req, res) => {
-    // console.log(req.body)
+    console.log(req.body)
     let result = JSON.parse(JSON.stringify(analytics.filterByAll(req.body)))
-    console.log(result)
+    //console.log(result)
     res.json(result)
 })
 
