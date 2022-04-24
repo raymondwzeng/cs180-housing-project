@@ -1,4 +1,5 @@
 import ReactSlider from 'react-slider'
+import './Slider.css'
 
 /*
 The TwoSidedSlider originally within App.js. Takes in no new parameters.
