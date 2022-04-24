@@ -19,6 +19,23 @@
     align-items: baseline;
 }
 
+.card > #keyInfo > img {
+    margin-left: auto;
+    max-height: 1.5em;
+}
+
+
+.card > #keyInfo > img:hover {
+    transition-duration: 200ms;
+    margin-left: auto;
+    max-height: 1.7em;
+}
+
+.card > #keyInfo > img.down {
+    transition-duration: 200ms;
+    transform: rotate(-90deg);
+}
+
 .card > #keyInfo > #homeValue {
     font-size: xx-large;
 }

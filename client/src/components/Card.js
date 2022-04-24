@@ -12,7 +12,7 @@ class Card extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isEditMode: true,
+            isEditMode: false,
             _median_value: props._median_value,
             _median_age: props._median_age,
             _median_income: props._median_income,
@@ -33,9 +33,9 @@ class Card extends Component {
     }
 
     toggleState() {
-        // this.setState({
-        //     isEditMode: !this.state.isEditMode
-        // })
+        this.setState({
+            isEditMode: !this.state.isEditMode
+        })
     }
 
     changeValue(attributeName, value) {
@@ -50,11 +50,12 @@ class Card extends Component {
     }
 
     render() {
-        return <div className="card" key={this.props.key} onClick={this.toggleState}>
+        return <div className="card" key={this.props.key}>
                 <div id='keyInfo'>
                     <div id='homeValue'>${this.props._median_value}</div> @
                     <div id='location'>({this.props._latitude}, {this.props._longitude}), closest to</div>
                     <div id='metro'>{this.props._closest_metro}</div>
+                    <img id='dropdown-arrow' className={this.state.isEditMode ? `down` : `up`}  src="/dropdown_arrow.png" alt="dropdown arrow" onClick={this.toggleState}/>
                 </div>
                 <div id='aboutTheNeighborhood'>
                     <div>Population: {this.props._population}</div> |
