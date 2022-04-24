@@ -122,7 +122,7 @@ async function displayAllData(response) {
   for (var i = 0; i < response.length; i++) {
     // append each neighborhood to our page
     div = document.createElement("div");
-    div.innerHTML = response[i].id+' | '+response[i]._median_value + ' | ' + response[i]._median_income + ' | ' + response[i]._median_age + ' | '
+    div.innerHTML = response[i]._id+' | '+response[i]._median_value + ' | ' + response[i]._median_income + ' | ' + response[i]._median_age + ' | '
                   + response[i]._total_rooms + ' | ' + response[i]._total_bedrooms + ' | ' + response[i]._population + ' | '
                   + response[i]._households + ' | ' + response[i]._latitude + ' | ' + response[i]._longitude + ' | ' 
                   + response[i]._distance_to_coast + ' | ' + response[i]._distance_to_LA + ' | ' + response[i]._distance_to_SD
