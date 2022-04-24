@@ -82,15 +82,12 @@ async function displayAllData(response) {
   var mainContainer = document.getElementById("output");
   mainContainer.innerText = "";
 
-  var div = document.createElement("div");
-  div.innerHTML = 'ID|Median Value|Median Income|Median Age|Total Rooms|Total Bedrooms|Population|Households|Latitude|Longitude|Dist to Coast|LA Dist|SD Dist|SF Dist|SJ DIst|Closest Metro'
-  mainContainer.appendChild(div);
-
   let tempCardContainer = []; //Empty out the cardContainer before injecting new data
 
   for (var i = 0; i < response.length; i++) {
+    //TODO: Add support for ID property here
     response[i].key = i
-    const newCard = Card(response[i])
+    const newCard = <Card {...response[i]}/>
     tempCardContainer.push(newCard)
   }
   setCardContainerOuter(tempCardContainer)
