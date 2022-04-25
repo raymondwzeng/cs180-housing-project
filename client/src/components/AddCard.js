@@ -10,6 +10,7 @@ class AddCard extends Component {
             _median_value: 0,
             _median_income: 0,
             _median_age: 0,
+            _total_rooms: 0,
             _total_bedrooms: 0,
             _population: 0,
             _households: 0,
