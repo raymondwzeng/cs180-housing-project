@@ -13,8 +13,7 @@ class OperationsLayer {
 	//Singleton constructor. If data already loaded, then return the list. Otherwise, load the list.
 	constructor() {
 		if(!isLoaded) {
-			neighborhoodList = csv.load()
-			isLoaded = true
+			OperationsLayer.initializeDataLayer();
 		}
 		return neighborhoodList
 	}
@@ -23,14 +22,25 @@ class OperationsLayer {
 	Function to get the entire NeighborhoodList array from the csv.
 	*/
 	static getNeighborhoodList() {
+		if(!isLoaded) OperationsLayer.initializeDataLayer();
 		return neighborhoodList
+	}
+
+	/*
+	Function to get the entire NeighborhoodList array from the csv.
+	*/
+	static initializeDataLayer() {
+		if(!isLoaded) {
+			neighborhoodList = csv.load("./California_Houses.csv")
+			isLoaded = true
+		}
 	}
 
 	/*
 	Test function to see filtering in action
 	*/
 	static filterByAll(constraintArray) {
-		if(!isLoaded) initializeDataLayer();
+		if(!isLoaded) OperationsLayer.initializeDataLayer();
 		// console.log(constraintArray)
 		const newList = neighborhoodList
 		.filter( element => element.median_value >= constraintArray.minMedianHousePrice)
@@ -46,7 +56,7 @@ class OperationsLayer {
 	Delete a neighborhood with the specified id
 	*/
 	static deleteNeighborhood(id) {
-		if(!isLoaded) initializeDataLayer();
+		if(!isLoaded) OperationsLayer.initializeDataLayer();
 
 		// Search through neighborhoodList for the neighborhood with the given id
 		for(let i = 0; i < neighborhoodList.length; i++) {

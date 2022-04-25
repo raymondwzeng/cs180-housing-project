@@ -1,0 +1,65 @@
+.card {
+    transition-duration: 400ms;
+    padding: 0.5em;
+    padding-bottom: 2em;
+    border-radius: 10px;
+    background-color: lightblue;
+    margin: 0.7em 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+}
+
+.card:hover {
+    background-color: lightgray;
+    box-shadow: 0 0.2em 10px 0.2em grey;
+}
+
+.card > #keyInfo {
+    align-items: baseline;
+}
+
+.card > #keyInfo > img {
+    transition-duration: 200ms;
+    margin-left: auto;
+    max-height: 1.5em;
+}
+
+
+.card > #keyInfo > img:hover {
+    margin-left: auto;
+    max-height: 1.7em;
+}
+
+.card > #keyInfo > img.down {
+    transform: rotate(-90deg);
+}
+
+.card > #keyInfo > #homeValue {
+    font-size: xx-large;
+}
+
+.card > .column-flex {
+    display: flex;
+    flex-direction: row;
+    gap: 0.4em;
+}
+
+.card > #editCard {
+    width: 50%;
+    flex-direction: column;
+}
+
+.card > #editCard > div > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card > #editCard > #header {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.card > .hidden {
+    display: none;
+}

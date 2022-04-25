@@ -8,6 +8,44 @@ const analytics = require('../analytics');
 chai.use(require('chai-json'))
 chai.use(chaiHttp)
 
+describe("api/cards using router.delete", () => {
+    it("Should return successful delete message after deleting", () => {
+        let req = {
+            "id": "10"
+        }
+
+        chai.request("http://localhost:4000")
+            .delete("/api/cards")
+            .send(req)
+            .end((err, res) => {
+                expect(err).to.be.null
+                expect(res).to.be.json
+                /*
+                TODO: Change the next unit test to work even if npm test is called multiple times within the same session
+                You can't delete the neighborhood with id 10 more than once!
+                Perhaps use all the API calls to CREATE a neighborhood, UPDATE it, and DELETE it all in one go?
+                */
+                expect(res.body).to.be.equal("Successfully deleted neighborhood with id: " + req.id)
+            })
+    })
+    it("Should return error message if delete failed", () => {
+        let req = {
+            "id": "-1"
+        }
+
+        chai.request("http://localhost:4000")
+            .delete("/api/cards")
+            .send(req)
+            .end((err, res) => {
+                expect(err).to.be.null
+                expect(res).to.be.json
+                expect(res.body).to.be.equal("ERROR: unable to delete neighborhood with id of " + req.id)
+            })
+    })
+
+
+})
+
 describe("Testing API calls", () => {
     it("Should receive {\"first\": \"John\", \"last\": \"Doe\"} after POST to /api/test", () => {
         const dummyData = {
@@ -34,8 +72,8 @@ describe("Testing API calls", () => {
             .end((err, res) => {
                 expect(err).to.be.null
                 expect(res).to.be.json
-                //expect(res.body.length).to.be.equal(OperationsLayer.getNeighborhoodList().length)
-                //expect(res.body).to.eql(OperationsLayer.getNeighborhoodList()) //assert deep equality
+                expect(res.body.length).to.be.equal(OperationsLayer.getNeighborhoodList().length)
+                expect(res.body).to.eql(OperationsLayer.getNeighborhoodList()) //assert deep equality
             })
     })
     it("Should receive a filtered neighborhoodList array after POST to /api/getFilteredData", () => {

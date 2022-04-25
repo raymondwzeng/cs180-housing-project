@@ -28,19 +28,26 @@ Current schema (JSON):
     distance_to_SF
 }
 */
-function load() {
+function load(filepath) {
     let neighborhoodsList = [];
-    fs.readFileSync("./California_Houses.csv", {
-        encoding: "utf-8"
-    }).split('\r\n').forEach( entry => {
-        const entryArray = entry.split(',')
-        //Note: Second condition is to eliminate the titles.
-        if(entryArray.length == 15 && !isNaN(Number(entryArray[1]))) {
-            const newNeighborhood = new Neighborhood(entryArray)
-            neighborhoodsList.push(newNeighborhood)
-        }
-    })
-    return neighborhoodsList //TODO: Only allow csv.js to manipulate the data. Basically, "close" the DB layer.
+
+    try {
+        fs.readFileSync(filepath, {
+            encoding: "utf-8"
+        }).split('\r\n').forEach( entry => {
+            const entryArray = entry.split(',')
+            //Note: Second condition is to eliminate the titles.
+            if(entryArray.length == 15 && !isNaN(Number(entryArray[1]))) {
+                const newNeighborhood = new Neighborhood(entryArray)
+                neighborhoodsList.push(newNeighborhood)
+            }
+        })
+        return neighborhoodsList //TODO: Only allow csv.js to manipulate the data. Basically, "close" the DB layer.
+    }catch(error){
+        return 'File not found!';
+    }
+
+    
 }
 
 exports.load = load;

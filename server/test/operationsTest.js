@@ -3,7 +3,6 @@ const { expect } = require('chai');
 const { OperationsLayer } = require('../operations');
 
 describe("operations.getNeighborhoodList function", () => {
-	//const operationsNeighborhoodList = new OperationsLayer();
 
     it("Should read in exactly 20640 rows", () => {
         expect(OperationsLayer.getNeighborhoodList().length).to.be.equal(20640);
@@ -18,8 +17,8 @@ describe("operations.getNeighborhoodList function", () => {
 });
 
 describe("operations.deleteNeighborhood function", () => {
-	    
-    it("LengthAfterDelete should be 1 less than LengthBefore Delete", () => {
+    it("LengthAfterDelete should be 1 less than LengthBeforeDelete", () => {
+
         lengthBeforeDelete = OperationsLayer.getNeighborhoodList().length; // Length of the neighborhoodList before a row is deleted
         deleteCode = OperationsLayer.deleteNeighborhood(10); // Delete id 10 and return 0 if successful
         lengthAfterDelete = OperationsLayer.getNeighborhoodList().length;  // Length of the neighborhoodList after a row is deleted
