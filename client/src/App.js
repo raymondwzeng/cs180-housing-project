@@ -71,7 +71,6 @@ function App() {
       <input className="button" type="submit" value="Show filtered data" onClick={() => fetchFilteredData(medianHousePrice, latitude, longitude)}/>
       <p id="output"> Result from server</p>
       <div id='card-container'>
-        <div id='header'/>
         {tempCardContainer.map(element => {
           return <Card {...element} updateData={updateData} deleteEntry={deleteEntry}/>
         })}
@@ -144,8 +143,7 @@ async function displayAllData(response) {
   let tempCardContainer = []; //Empty out the cardContainer before injecting new data
 
   for (var i = 0; i < response.length; i++) {
-    //TODO: Add support for ID property here
-    response[i].key = response[i].id
+    response[i].key = response[i]._id
     tempCardContainer.push(response[i])
   }
   setCardContainerOuter(tempCardContainer)
