@@ -70,11 +70,11 @@ router.delete('/cards', (req, res) => {
     var result = OperationsLayer.deleteNeighborhood(req.body.id)
     if (result == 0) {
         console.log("delete was successful!")
-        res.json("Successfully deleted neighborhood")
+        res.json("Successfully deleted neighborhood with id: " + req.body.id)
     }
     else {
         console.log("ERROR: unable to delete neighborhood with the given information")
-        res.json("ERROR: unable to delete neighborhood using the given information")
+        res.json("ERROR: unable to delete neighborhood with id of " + req.body.id)
     }
 })
 
