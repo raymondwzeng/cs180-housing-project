@@ -31,10 +31,7 @@ Current schema (JSON):
 function load(filepath) {
     let neighborhoodsList = [];
 
-    if(!filepath){
-        console.error("ERROR: No filepath in load function")
-        return;
-    }else {
+    try {
         fs.readFileSync(filepath, {
             encoding: "utf-8"
         }).split('\r\n').forEach( entry => {
@@ -46,6 +43,8 @@ function load(filepath) {
             }
         })
         return neighborhoodsList //TODO: Only allow csv.js to manipulate the data. Basically, "close" the DB layer.
+    }catch(error){
+        return 'File not found!';
     }
 
     
