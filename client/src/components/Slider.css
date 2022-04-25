@@ -1,19 +1,18 @@
 .slider {
   display: flex;
   flex-direction: row;
-  width: 50%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .slider-text {
-  margin-top: 10px;
-  margin-right: 15px;
+  padding: 0 2rem;
 }
 
 .horizontal-slider {
     width: 400px;
     max-width: 500px;
     height: 50px;
-    margin: auto;
 }
 
 .slider-thumb {
