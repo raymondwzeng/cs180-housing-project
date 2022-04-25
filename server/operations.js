@@ -62,7 +62,8 @@ class OperationsLayer {
 		for(let i = 0; i < neighborhoodList.length; i++) {
 			if(neighborhoodList[i].id == id){
 				//delete the neighborhood at index location i
-				neighborhoodList.splice(i, 1);
+				neighborhoodList.splice(i, 1);	
+				csv.save(neighborhoodList, "California_Houses_Backup.csv");
 				return 0; // addNeighborhood successful.
 			}	
 		}
@@ -78,7 +79,8 @@ class OperationsLayer {
 		if(neighborhoodData.length == 14 && !isNaN(Number(neighborhoodData[1]))) {
 			neighborhoodData.push(neighborhoodList.at(-1).id + 1) 		// Create a new neighborhood ID by incrementing
             const newNeighborhood = new Neighborhood(neighborhoodData); // Create a new neighborhood with neighborhoodData 
-            neighborhoodList.push(newNeighborhood);						// Add the new neighborhood to neighborhoodList
+			neighborhoodList.push(newNeighborhood);						// Add the new neighborhood to neighborhoodList
+			csv.save(neighborhoodList, "California_Houses_Backup.csv");
 			return 0; // addNeighborhood successful.
         }	
 		/*
@@ -105,6 +107,7 @@ class OperationsLayer {
 				if(neighborhoodList[i].id == neighborhoodData[14]){ // Find the neighborhood with the specified id
 					//Replace the neighborhood at index location i with the newNeighborhood
 					neighborhoodList[i] = newNeighborhood;
+					csv.save(neighborhoodList, "California_Houses_Backup.csv");
 					return 0; // addNeighborhood successful.
 				}	
 			}
