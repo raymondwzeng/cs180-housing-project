@@ -45,9 +45,24 @@ function load(filepath) {
         return neighborhoodsList //TODO: Only allow csv.js to manipulate the data. Basically, "close" the DB layer.
     }catch(error){
         return 'File not found!';
-    }
-
-    
+    }   
 }
-
+/**
+ * Saves the existing (memory) data onto disk.
+ * @param {Object} data - The data to store. Expects an array of neighborhood objects.
+ * @param {string} filename - The filename to store.
+ */
+function save(data, filename) {
+    let dataString = "Median_House_Value,Median_Income,Median_Age,Tot_Rooms,Tot_Bedrooms,Population,Households,Latitude,Longitude,Distance_to_coast,Distance_to_LA,Distance_to_SanDiego,Distance_to_SanJose,Distance_to_SanFrancisco,ID \r\n"
+    data.forEach(element => {
+        const elementList = [element.median_value, element.median_income, element.median_age, element.total_rooms, element.total_bedrooms, element.population, element.households, element.latitude, element.longitude, element.distance_to_coast, element.distance_to_LA, element.distance_to_SD, element.distance_to_SJ, element.distance_to_SF, element.id]
+        dataString += elementList.map(element => Number(element)).toString() + "\r\n"
+    })
+    try {
+        fs.writeFileSync(filename, dataString)
+    } catch (error) {
+        console.warn(error)
+    }
+}
+exports.save = save
 exports.load = load;
