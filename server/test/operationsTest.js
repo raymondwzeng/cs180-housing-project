@@ -22,7 +22,7 @@ describe("operations.deleteNeighborhood function", () => {
     
     //OperationsLayer.deleteNeighborhood(10); // Delete the neighborhood with an id of 10
     
-    it("LengthAfterDelete should be 1 less than LengthBefore Delete", () => {
+    it("LengthAfterDelete should be 1 less than LengthBeforeDelete", () => {
         lengthBeforeDelete = OperationsLayer.getNeighborhoodList().length; // Length of the neighborhoodList before a row is deleted
         deleteCode = OperationsLayer.deleteNeighborhood(10); // Delete id 10 and return 0 if successful
         lengthAfterDelete = OperationsLayer.getNeighborhoodList().length;  // Length of the neighborhoodList after a row is deleted
