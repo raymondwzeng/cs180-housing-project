@@ -2,13 +2,14 @@ import './App.css';
 import TwoSidedSlider from './components/TwoSidedSlider';
 import {useEffect, useState} from 'react'
 import Card from './components/Card';
+import AddCard from './components/AddCard';
 
 const minMedianHousePrice = 0
 const maxMedianHousePrice = 500000
 const minLatitudeLongitude = -150
 const maxLatitudeLongitude = 150
 
-const defaultHeaders = {
+export const defaultHeaders = {
   'Accept': 'application/json',
   'Content-Type': 'application/json'
 }
@@ -79,6 +80,7 @@ function App() {
       <input className="button" type="submit" value="Show filtered data" onClick={() => fetchFilteredData(medianHousePrice, latitude, longitude)}/>
       <p id="output"> Result from server</p>
       <div id='card-container'>
+        <AddCard cardContainerSetter={setCardContainer}/>
         {tempCardContainer.map(element => {
           return <Card {...element} updateData={updateData} deleteEntry={deleteEntry}/>
         })}
