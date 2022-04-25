@@ -20,6 +20,11 @@ describe("api/cards using router.delete", () => {
             .end((err, res) => {
                 expect(err).to.be.null
                 expect(res).to.be.json
+                /*
+                TODO: Change the next unit test to work even if npm test is called multiple times within the same session
+                You can't delete the neighborhood with id 10 more than once!
+                Perhaps use all the API calls to CREATE a neighborhood, UPDATE it, and DELETE it all in one go?
+                */
                 expect(res.body).to.be.equal("Successfully deleted neighborhood with id: " + req.id)
             })
     })
