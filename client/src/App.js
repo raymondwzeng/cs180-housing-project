@@ -23,12 +23,12 @@ function App() {
   const [longitude, setLongitude] = useState([minLatitudeLongitude, maxLatitudeLongitude])
   const [cardContainer, setCardContainer] = useState([])
   const [tempCardContainer, setTempCardContainer] = useState([])
-  const [maxShow, setMaxShow] = useState(100)
+  const [maxShow, setMaxShow] = useState(50)
 
   setCardContainerOuter = setCardContainer //Pass the method outside so that other functions in the file can control the state
 
   const fetchNext = () => {
-    setMaxShow(maxShow+Math.min(100, cardContainer.length - tempCardContainer.length))
+    setMaxShow(maxShow+Math.min(50, cardContainer.length - tempCardContainer.length))
     setTempCardContainer(cardContainer.slice(0, maxShow))
   }
 
@@ -39,34 +39,42 @@ function App() {
     }
   }, [cardContainer])
 
-  window.addEventListener('scroll', () => {
-    //Lifted from W3 docs with some modification: https://www.w3docs.com/snippets/javascript/how-to-check-if-user-has-scrolled-to-the-bottom-of-the-page.htm
-    if(window.scrollY + window.innerHeight > document.body.clientHeight) {
-      if(maxShow < cardContainer.length) {
-        fetchNext()
+  
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      //Lifted from W3 docs with some modification: https://www.w3docs.com/snippets/javascript/how-to-check-if-user-has-scrolled-to-the-bottom-of-the-page.htm
+      if(window.scrollY + window.innerHeight > document.body.clientHeight) {
+        if(maxShow < cardContainer.length) {
+          fetchNext()
+        }
       }
+    })
+
+    return () => {
+      window.removeEventListener('scroll')
     }
-  })
+  }, [])
 
   // Barebones HTML for the webpage
   return (
     <div className="page-contents">
       <h1>1990 Housing Data Viewer</h1>
       <h3>A reminder that today's economy is screwed for the rest of us</h3>
-      <div className='test'>Min:{latitude[0]}, Max:{latitude[1]}</div>
-      {/* Two Sided Sliders for all of the data values*/}
-      <div className="slider">
-        <div className="slider-text">Median House Price</div>
-        <TwoSidedSlider className="median-slider" min={minMedianHousePrice} max={maxMedianHousePrice} onChange={(medianHousePrice, _) => setMedianHousePrice(medianHousePrice)}/>
-      </div>
-      <div className="slider">
-        <div className="slider-text">Latitude</div>
-        <TwoSidedSlider className="latitude-slider" min={minLatitudeLongitude} max={maxLatitudeLongitude} onChange={(latitude, _) => setLatitude(latitude)}/>
-      </div>
-      <div className="slider">
-        <div className="slider-text">Longitude</div>
-        <TwoSidedSlider className="longitude-slider" min={minLatitudeLongitude} max={maxLatitudeLongitude} onChange={(longitude, _) => setLongitude(longitude)}/>
-      </div>
+        {/* Two Sided Sliders for all of the data values*/}
+        <div id='slider-container'>
+        <div className="slider">
+          <div className="slider-text">Median House Price: [{medianHousePrice[0]}, {medianHousePrice[1]}]</div>
+          <TwoSidedSlider className="median-slider" min={minMedianHousePrice} max={maxMedianHousePrice} onChange={(medianHousePrice, _) => setMedianHousePrice(medianHousePrice)}/>
+        </div>
+        <div className="slider">
+          <div className="slider-text">Latitude: [{latitude[0]}, {latitude[1]}]</div>
+          <TwoSidedSlider className="latitude-slider" min={minLatitudeLongitude} max={maxLatitudeLongitude} onChange={(latitude, _) => setLatitude(latitude)}/>
+        </div>
+        <div className="slider">
+          <div className="slider-text">Longitude: [{longitude[0]}, {longitude[1]}]</div>
+          <TwoSidedSlider className="longitude-slider" min={minLatitudeLongitude} max={maxLatitudeLongitude} onChange={(longitude, _) => setLongitude(longitude)}/>
+        </div>
+        </div>
       <input className="button" type="submit" value="Show all data" onClick={fetchAllData}/>
       <input className="button" type="submit" value="Show filtered data" onClick={() => fetchFilteredData(medianHousePrice, latitude, longitude)}/>
       <p id="output"> Result from server</p>
