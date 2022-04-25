@@ -12,7 +12,7 @@ class OperationsLayer {
 	//Singleton constructor. If data already loaded, then return the list. Otherwise, load the list.
 	constructor() {
 		if(!isLoaded) {
-			neighborhoodList = csv.load()
+			neighborhoodList = csv.load("./California_Houses.csv")
 			isLoaded = true
 		}
 		return neighborhoodList
