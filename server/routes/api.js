@@ -11,7 +11,7 @@ router.post('/test', (req, res) => {
 
 router.post('/neighborhoodList', (req, res) => {
     console.log(req.body)
-    var jsonString = JSON.stringify(new OperationsLayer());
+    var jsonString = JSON.stringify(OperationsLayer.getNeighborhoodList());
     var jsonParse = JSON.parse(jsonString)
     //console.log(req.body)
     res.json(jsonParse);

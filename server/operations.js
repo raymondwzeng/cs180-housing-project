@@ -40,6 +40,22 @@ class OperationsLayer {
 		.filter( element => element.longitude <= constraintArray.maxLongitude)
 		return newList
 	}
+	/*
+	Delete a neighborhood with the specified id
+	*/
+	static deleteNeighborhood(id) {
+		if(!isLoaded) initializeDataLayer();
+
+		// Search through neighborhoodList for the neighborhood with the given id
+		for(let i = 0; i < neighborhoodList.length; i++) {
+			if(neighborhoodList[i].id == id){
+				//delete the neighborhood at index location i
+				neighborhoodList.splice(i, 1);
+				return 0;
+			}	
+		}
+		return -1;
+	}
 	
 }
 
