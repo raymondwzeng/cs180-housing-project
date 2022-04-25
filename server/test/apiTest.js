@@ -10,7 +10,6 @@ chai.use(chaiHttp)
 
 describe("api/cards using router.delete", () => {
     it("Should return successful delete message after deleting", () => {
-        //TODO: Add additional filters to the req once those filters are added to /api/getFilteredData
         let req = {
             "id": "10"
         }
@@ -25,7 +24,6 @@ describe("api/cards using router.delete", () => {
             })
     })
     it("Should return error message if delete failed", () => {
-        //TODO: Add additional filters to the req once those filters are added to /api/getFilteredData
         let req = {
             "id": "-1"
         }
