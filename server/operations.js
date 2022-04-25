@@ -73,7 +73,7 @@ class OperationsLayer {
 	Add a new neighborhood with the specified data
 	*/
 	static addNeighborhood(neighborhoodData) {
-		if(!isLoaded) initializeDataLayer();
+		if(!isLoaded) OperationsLayer.initializeDataLayer();
 
 		if(neighborhoodData.length == 14 && !isNaN(Number(neighborhoodData[1]))) {
 			neighborhoodData.push(neighborhoodList.at(-1).id + 1) 		// Create a new neighborhood ID by incrementing
