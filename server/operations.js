@@ -5,6 +5,7 @@ File that stores neighborhoodList in memory. Performs all CRUD operations on nei
 */
 
 const csv = require('./csv')
+const Neighborhood = require('./neighborhood') // Required to call Neighborhood constructor
 
 let isLoaded = false
 let neighborhoodList = []
@@ -55,6 +56,51 @@ class OperationsLayer {
 			}	
 		}
 		return -1;
+	}
+
+	/*
+	Add a new neighborhood with the specified data
+	*/
+	static addNeighborhood(neighborhoodData) {
+		if(!isLoaded) initializeDataLayer();
+
+		if(neighborhoodData.length == 14 && !isNaN(Number(neighborhoodData[1]))) {
+			neighborhoodData.push(neighborhoodList.at(-1).id + 1) 		// Create a new neighborhood ID by incrementing
+            const newNeighborhood = new Neighborhood(neighborhoodData); // Create a new neighborhood with neighborhoodData 
+            neighborhoodList.push(newNeighborhood);						// Add the new neighborhood to neighborhoodList
+			return 0;
+        }
+		// else if(neighborhoodData instanceof Neighborhood) {		// If the neighborhoodData is a Neighborhood
+		// 	neighborhoodData.id = neighborhoodList.at(-1).id + 1;
+		// 	neighborhoodList.push(neighborhoodData);						
+		// 	return 0;
+		// }
+
+		
+		return -1; // addNeighborhood failed.
+	}
+
+	/*
+	Modify the neighborhood with the specified id
+	*/
+	static updateNeighborhood(neighborhoodData) {
+		if(!isLoaded) initializeDataLayer();
+
+		if(neighborhoodData.length == 15 && !isNaN(Number(neighborhoodData[1]))) {
+            const newNeighborhood = new Neighborhood(neighborhoodData); // Create a new neighborhood with neighborhoodData 
+			for(let i = 0; i < neighborhoodList.length; i++) {
+				if(neighborhoodList[i].id == neighborhoodData[14]){ // Find the nighborhood with the specified id
+					//Replace the neighborhood at index location i with the newNeighborhood
+					neighborhoodList[i] = newNeighborhood;
+					return 0;
+				}	
+			}
+        }
+		
+		
+
+		
+		return -1; // addNeighborhood failed.
 	}
 	
 }
