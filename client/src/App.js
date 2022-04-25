@@ -1,6 +1,6 @@
 import './App.css';
 import TwoSidedSlider from './components/TwoSidedSlider';
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import Card from './components/Card';
 
 const minMedianHousePrice = 0
@@ -22,8 +22,31 @@ function App() {
   const [latitude, setLatitude] = useState([minLatitudeLongitude, maxLatitudeLongitude])
   const [longitude, setLongitude] = useState([minLatitudeLongitude, maxLatitudeLongitude])
   const [cardContainer, setCardContainer] = useState([])
+  const [tempCardContainer, setTempCardContainer] = useState([])
+  const [maxShow, setMaxShow] = useState(100)
 
   setCardContainerOuter = setCardContainer //Pass the method outside so that other functions in the file can control the state
+
+  const fetchNext = () => {
+    setMaxShow(maxShow+Math.min(100, cardContainer.length - tempCardContainer.length))
+    setTempCardContainer(cardContainer.slice(0, maxShow))
+  }
+
+  useEffect(() => {
+    console.log("Update on cardcontainer:", cardContainer)
+    if(cardContainer.length >= 0) {
+      setTempCardContainer(cardContainer.slice(0, maxShow))
+    }
+  }, [cardContainer])
+
+  window.addEventListener('scroll', () => {
+    //Lifted from W3 docs with some modification: https://www.w3docs.com/snippets/javascript/how-to-check-if-user-has-scrolled-to-the-bottom-of-the-page.htm
+    if(window.scrollY + window.innerHeight > document.body.clientHeight) {
+      if(maxShow < cardContainer.length) {
+        fetchNext()
+      }
+    }
+  })
 
   // Barebones HTML for the webpage
   return (
@@ -49,7 +72,7 @@ function App() {
       <p id="output"> Result from server</p>
       <div id='card-container'>
         <div id='header'/>
-        {cardContainer.map(element => {
+        {tempCardContainer.map(element => {
           return <Card {...element} updateData={updateData} deleteEntry={deleteEntry}/>
         })}
       </div>
@@ -110,14 +133,11 @@ async function fetchFilteredData(medianHousePrice, latitude, longitude) {
     })
   }).then(response => response.json())
   .then(response => {
-    console.log(response)
     displayAllData(response)
   })
 }
 
 async function displayAllData(response) {
-  console.log(response);
-
   var mainContainer = document.getElementById("output");
   mainContainer.innerText = "";
 
@@ -144,7 +164,6 @@ async function postFunc(req, sendText){
   //turn the POST response into a json file, and return the firstParam
   
     let data = await response.json()
-    console.log(data);
     return data;
   }
   catch(error) {
