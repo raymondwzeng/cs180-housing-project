@@ -48,17 +48,15 @@ class AddCard extends Component {
         fetch('http://localhost:4000/api/cards', {
             method: 'POST',
             headers: defaultHeaders,
-            body: JSON.stringify({
-              state: sendState //Could spread out the dictionary instead.
-            })})
+            body: JSON.stringify({...sendState})})
             .then(response => response.json())
             .then(responseJSON => console.log(responseJSON)) //TODO: Update the set of cards.
     }
 
     render() {
         return (
-            <div className="card" onClick={this.toggleState}>
-                <div className={this.state.isEnabled ? `hidden` : `visible`}>Add a new entry...</div>
+            <div className="card">
+                <div onClick={this.toggleState} className={this.state.isEnabled ? `hidden` : `visible`}>Add a new entry...</div>
                 <div className={this.state.isEnabled ? `visible` : `hidden`}>
                     <EditAttributes {...this.state} onChange={(e) => this.changeValue(e.target.id, e.target.value)}/>
                     <button onClick={this.submitToAPI}>Create</button>
