@@ -39,7 +39,7 @@
     font-size: xx-large;
 }
 
-.card > div {
+.card > .column-flex {
     display: flex;
     flex-direction: row;
     gap: 0.4em;
