@@ -39,3 +39,29 @@ describe("Load Function", () => {
         
     // })
 })
+
+describe("Save function with edits", () => {
+    OperationsLayer.deleteNeighborhood(1)
+    it("Should have 20639 rows after deletion", () => {
+        let data = csv.load("./California_Houses_Backup.csv")    
+        expect(data.length).to.be.equal(20639)
+    })
+    it("Should have a value of 452602 as a median value in row with ID 4 when updated", () => {
+        OperationsLayer.updateNeighborhood([
+            452602,      8,     41,
+               880,    129,    322,
+               126,     37,   -122,
+              9263, 556529, 735501,
+             67432,  21250,      4
+          ])
+        let data = csv.load("./California_Houses_Backup.csv")
+        expect(data[2].median_value).to.be.equal("452602")
+    })
+    it("Should have a length of 20640 after adding a new neighborhood", () => {
+        const newNeighborhood = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        OperationsLayer.addNeighborhood(newNeighborhood)
+        let data = csv.load("./California_Houses_Backup.csv")
+        expect(data.length).to.be.equal(20640)
+        expect(data[20639].median_value).to.be.equal("0")
+    })
+})
