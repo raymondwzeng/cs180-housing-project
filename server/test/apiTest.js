@@ -132,9 +132,7 @@ describe("Testing api/cards as a whole", () => {
                 expect(err).to.be.null
                 expect(res).to.be.json
                 expect(res.body.length).to.be.equal(1)
-                // expect(res.body).to.contain({
-                //     _median_value: 10
-                // }) //expect to find our original value
+                expect(res.body[0]._median_value).to.be.equal(10) //expect to find our original value
             })
     })
 
