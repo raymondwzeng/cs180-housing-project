@@ -38,7 +38,7 @@ describe("operations.deleteNeighborhood function", () => {
 
 describe("operations.addNeighborhood function", () => {
 	neighborhoodData = [360000, 50000, 50, 3000, 1000, 30000, 2000, 38, -122, 4206.81187, 544221.0324, 723064.4512, 53978.76396, 21266.94106];
-    lastID = OperationsLayer.getNeighborhoodList().at(-1).id;
+    lastID = Number(OperationsLayer.getNeighborhoodList().at(-1).id);
     lengthBeforeAdd = OperationsLayer.getNeighborhoodList().length;
     addFunctionStatus = OperationsLayer.addNeighborhood(neighborhoodData) // Adds a new neighborhood and returns 0 if successful
     lengthAfterAdd = OperationsLayer.getNeighborhoodList().length;
@@ -55,7 +55,7 @@ describe("operations.addNeighborhood function", () => {
     })
     it("Should read the correct values for the added neighborhood", () => {
         expect(addedMedian).to.be.equal(360000);
-        expect(addedID).to.be.equal(lastID + 1);
+        expect(addedID).to.be.equal(Number(lastID) + 1);
     })
 
 });
