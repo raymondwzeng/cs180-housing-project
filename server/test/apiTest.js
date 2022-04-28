@@ -38,7 +38,6 @@ describe("Testing api/neighborhoodList", () => {
                 expect(err).to.be.null
                 expect(res).to.be.json
                 expect(res.body.length).to.be.equal(OperationsLayer.getNeighborhoodList().length)
-                //expect(res.body).to.eql(OperationsLayer.getNeighborhoodList()) //assert deep equality
             })
     })
     it("Should receive a filtered neighborhoodList array after POST to /api/getFilteredData", () => {
@@ -68,28 +67,88 @@ describe("Testing api/neighborhoodList", () => {
     })
 })
 
-describe("Testing api/cards using router.delete", () => {
-    it("Should return successful delete message after deleting", () => {
-        let req = {
-            "id": "10"
-        }
-
+describe("Testing api/cards as a whole", () => {
+    it("Should have a larger list with our new item after adding", () => {
+        const newNeighborhood = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         chai.request("http://localhost:4000")
-            .delete("/api/cards")
-            .send(req)
+            .post("/api/cards")
+            .send(newNeighborhood)
             .end((err, res) => {
                 expect(err).to.be.null
                 expect(res).to.be.json
-                /*
-                TODO: Change the next unit test to work even if npm test is called multiple times within the same session
-                You can't delete the neighborhood with id 10 more than once!
-                Perhaps use all the API calls to CREATE a neighborhood, UPDATE it, and DELETE it all in one go?
-                */
-                expect(res.body).to.be.equal("Successfully deleted neighborhood with id: " + req.id)
+            })
+
+        chai.request("http://localhost:4000")
+            .post("/api/neighborhoodList")
+            .send()
+            .end((err, res) => {
+                expect(err).to.be.null
+                expect(res).to.be.json
+                expect(res.body.length).to.be.equal(20641)
             })
     })
+
+    it("Should have a different value in median value after updating", () => {
+        const request = {
+            id: 20641,
+            state: {
+                _median_value: 10,
+                _median_income: 0,
+                _median_age: 0,
+                _total_rooms: 0,
+                _total_bedrooms: 0,
+                _population: 0,
+                _households: 0,
+                _latitude: 0,
+                _longitude: 0,
+                _distance_to_coast: 0,
+                _distance_to_LA: 0,
+                _distance_to_SD: 0,
+                _distance_to_SJ: 0,
+                _distance_to_SF: 0,
+                id: 20641
+            }
+        }
+
+        chai.request("http://localhost:4000")
+            .patch("/api/cards")
+            .send(request)
+            .end((err, res) => {
+                expect(err).to.be.null
+                expect(res).to.be.json
+            })
+
+        chai.request("http://localhost:4000")
+            .post("/api/getFilteredData")
+            .send({
+                minMedianHousePrice: 0,
+                maxMedianHousePrice: 100,
+                minLatitude: -150,
+                maxLatitude: 150,
+                minLongitude: -150,
+                maxLongitude: 150
+            })
+            .end((err, res) => {
+                expect(err).to.be.null
+                expect(res).to.be.json
+                expect(res.body.length).to.be.equal(1)
+                expect(res.body[0]._median_value).to.be.equal(10) //expect to find our original value
+            })
+    })
+
+    it("Should no longer exist after deletion", () => {
+        chai.request("http://localhost:4000")
+            .delete("/api/cards")
+            .send({id: 20641})
+            .end((err, res) => {
+                expect(err).to.be.null
+                expect(res).to.be.json
+                expect(res.body).to.be.equal("Successfully deleted neighborhood with id: 20641")
+            })
+    })
+
     it("Should return error message if delete failed", () => {
-        let req = {
+        const req = {
             "id": "-1"
         }
 
