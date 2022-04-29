@@ -9,78 +9,78 @@ function getColumn(constraintArray,x){
 	let column=[]
 	switch(x){
 		case 1:
-			for(int i=0;i<list.length;i++){
-				column.push(list[i].median_value);
+			for(let i=0;i<list.length;i++){
+				column.push(parseInt(list[i].median_value));
 			}
 			break;
 		case 2:
-			for(int i=0;i<list.length;i++){
-				column.push(list[i].median_income);
+			for(let i=0;i<list.length;i++){
+				column.push(parseFloat(list[i].median_income));
 			}
 			break;
 		case 3:
-			for(int i=0;i<list.length;i++){
-				column.push(list[i].median_age);
+			for(let i=0;i<list.length;i++){
+				column.push(parseInt(list[i].median_age));
 			}
 			break;
 		case 4:
-			for(int i=0;i<list.length;i++){
-				column.push(list[i].total_rooms);
+			for(let i=0;i<list.length;i++){
+				column.push(parseInt(list[i].total_rooms));
 			}
 			break;
 		case 5:
-			for(int i=0;i<list.length;i++){
-				column.push(list[i].total_bedrooms);
+			for(let i=0;i<list.length;i++){
+				column.push(parseInt(list[i].total_bedrooms));
 			}
 			break;
 		case 6:
-			for(int i=0;i<list.length;i++){
-				column.push(list[i].population);
+			for(let i=0;i<list.length;i++){
+				column.push(parseInt(list[i].population));
 			}
 			break;
 		case 7:
-			for(int i=0;i<list.length;i++){
-				column.push(list[i].households);
+			for(let i=0;i<list.length;i++){
+				column.push(parseInt(list[i].households));
 			}
 			break;
 		case 8:
-			for(int i=0;i<list.length;i++){
-				column.push(list[i].latitude);
+			for(let i=0;i<list.length;i++){
+				column.push(parseFloat(list[i].latitude));
 			}
 			break;
 		case 9:
-			for(int i=0;i<list.length;i++){
-				column.push(list[i].longitude);
+			for(let i=0;i<list.length;i++){
+				column.push(parseFloat(list[i].longitude));
 			}
 			break;
 		case 10:
-			for(int i=0;i<list.length;i++){
-				column.push(list[i].distance_to_coast);
+			for(let i=0;i<list.length;i++){
+				column.push(parseFloat(list[i].distance_to_coast));
 			}
 			break;
 		case 11:
-			for(int i=0;i<list.length;i++){
-				column.push(list[i].distance_to_LA);
+			for(let i=0;i<list.length;i++){
+				column.push(parseFloat(list[i].distance_to_LA));
 			}
 			break;
 		case 12:
-			for(int i=0;i<list.length;i++){
-				column.push(list[i].distance_to_SD);
+			for(let i=0;i<list.length;i++){
+				column.push(parseFloat(list[i].distance_to_SD));
 			}
 			break;
 		case 13:
-			for(int i=0;i<list.length;i++){
-				column.push(list[i].distance_to_SJ);
+			for(let i=0;i<list.length;i++){
+				column.push(parseFloat(list[i].distance_to_SJ));
 			}
 			break;
 		case 14:
-			for(int i=0;i<list.length;i++){
-				column.push(list[i].distance_to_SF);
+			for(let i=0;i<list.length;i++){
+				column.push(parseFloat(list[i].distance_to_SF));
 			}
 			break;
 		case 15:
-			for(int i=0;i<list.length;i++){
-				column.push(list[i].id);
+			for(let i=0;i<list.length;i++){
+				column.push(parseInt(list[i].id));
 			}
 			break;
 	}
@@ -88,3 +88,4 @@ function getColumn(constraintArray,x){
 }
 
 exports.filterByAll = filterByAll
+exports.getColumn = getColumn
