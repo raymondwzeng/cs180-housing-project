@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { defaultHeaders } from "../App";
+import { defaultHeaders } from "../Data";
 import EditAttributes from "./EditAttributes";
 
 class AddCard extends Component {
