@@ -1,8 +1,8 @@
 import './Data.css';
-import TwoSidedSlider from './components/TwoSidedSlider';
+import TwoSidedSlider from '../components/TwoSidedSlider';
 import {useEffect, useState} from 'react'
-import Card from './components/Card';
-import AddCard from './components/AddCard';
+import Card from '../components/Card';
+import AddCard from '../components/AddCard';
 
 const minMedianHousePrice = 0
 const maxMedianHousePrice = 500000
