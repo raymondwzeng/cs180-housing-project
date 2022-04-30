@@ -1,4 +1,4 @@
-import './App.css';
+import './Data.css';
 import TwoSidedSlider from './components/TwoSidedSlider';
 import {useEffect, useState} from 'react'
 import Card from './components/Card';
@@ -18,7 +18,7 @@ let setCardContainerOuter
 
 fetchAllData() //Display data on initial run
 
-function App() {
+function Data() {
   const [medianHousePrice, setMedianHousePrice] = useState([minMedianHousePrice, maxMedianHousePrice])
   const [latitude, setLatitude] = useState([minLatitudeLongitude, maxLatitudeLongitude])
   const [longitude, setLongitude] = useState([minLatitudeLongitude, maxLatitudeLongitude])
@@ -148,6 +148,7 @@ async function fetchFilteredData(medianHousePrice, latitude, longitude) {
 
 async function displayAllData(response) {
   var mainContainer = document.getElementById("output");
+  console.log(document)
   mainContainer.innerText = "";
 
   let tempCardContainer = []; //Empty out the cardContainer before injecting new data
@@ -181,4 +182,4 @@ async function postFunc(req, sendText){
   
 }
 
-export default App;
+export default Data;
