@@ -32,6 +32,9 @@ const { expect } = require('chai');
         maxLongitude: longitude[1]
       }
       let test=[452600,8.3252,41,880,129,322,126,37.88,-122.23,9263.040773,556529.1583,735501.807,67432.517,21250.21377,1]
+      it("Checks that it gets 20640 items in total", () => {
+        expect(analytics.getColumn(req,1).length).to.be.equal(20640);
+      })
       it("Checks that it gets median value", () => {
         expect(analytics.getColumn(req,1)[0]).to.be.equal(test[0]);
       })
