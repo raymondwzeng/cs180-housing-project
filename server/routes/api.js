@@ -21,7 +21,6 @@ router.post('/neighborhoodList', (req, res) => {
 
 router.post('/getFilteredData', (req, res) => {
     console.log("api/getFilteredData call:")
-    console.log(req.body)
     let result = JSON.parse(JSON.stringify(analytics.filterByAll(req.body)))
     //console.log(result)
     res.json(result)
