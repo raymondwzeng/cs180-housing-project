@@ -1,3 +1,5 @@
+https://github.com/raymondwzeng/cs180-housing-project/actions/workflows/node.js.yml/badge.svg
+
 # Untitled CS180 Project
 
 Intro to be added
