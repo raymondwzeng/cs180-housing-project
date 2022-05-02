@@ -7,22 +7,24 @@ const router = express.Router()
 router.post('/test', (req, res) => {
     console.log("api/test call:")
     console.log(req.body)
+
     res.json(req.body)
 })
 
 router.post('/neighborhoodList', (req, res) => {
     console.log("api/neighborhoodList call:")
     console.log(req.body)
+
     var jsonString = JSON.stringify(OperationsLayer.getNeighborhoodList());
     var jsonParse = JSON.parse(jsonString)
-    //console.log(req.body)
     res.json(jsonParse);
 })
 
 router.post('/getFilteredData', (req, res) => {
     console.log("api/getFilteredData call:")
+    console.log(req.body)
+
     let result = JSON.parse(JSON.stringify(analytics.filterByAll(req.body)))
-    //console.log(result)
     res.json(result)
 })
 
@@ -42,8 +44,6 @@ router.post('/cards', (req, res) => {
             neighborhoodData.push(value);
         }
     }
-
-    //console.log(neighborhoodData)
 
     // result var store operation status. 0 means success, -1 means failure
     var result = OperationsLayer.addNeighborhood(neighborhoodData)
@@ -65,6 +65,7 @@ res: string message saying whether or not delete operation was successful.
 router.delete('/cards', (req, res) => {
     console.log("api/cards delete:")
     console.log(req.body)
+
     // result var store operation status. 0 means success, -1 means failure
     var result = OperationsLayer.deleteNeighborhood(req.body.id)
     if (result == 0) {
@@ -96,8 +97,6 @@ router.patch('/cards', (req, res) => {
         }
       }
 
-    //console.log(neighborhoodData)
-
     // result var store operation status. 0 means success, -1 means failure
     var result = OperationsLayer.updateNeighborhood(neighborhoodData)
     if (result == 0) {
@@ -107,6 +106,59 @@ router.patch('/cards', (req, res) => {
     else {
         console.log("ERROR: unable to update neighborhood with the given information")
         res.json("ERROR: unable to update neighborhood with id: " + req.body.state.id)
+    }
+})
+
+/*
+API call to get a single column from the neighborhood list.
+req: a url containing a parameter for the string column_name to obtain.
+res: an array of numbers from the specified column.
+*/
+router.get('/column', (req, res) => {
+    console.log("api/column call:")
+    let paramString = req.url.split('?')[1];
+    let queryString = new URLSearchParams(paramString);
+
+    column = queryString.get('column_name')
+    console.log(column)
+
+    //TODO: either extend this API call to accept constraint_array info, or remove filtering from the analytics.getColumn() entirely
+    const constraint_array = {
+        minMedianHousePrice: 0,
+        maxMedianHousePrice: 500000,
+        minLatitude: -150,
+        maxLatitude: 150,
+        minLongitude: -150,
+        maxLongitude: 150
+    }
+
+    //determine the column number based on the column name
+    column_num = -1;
+    switch(column){
+		case "Median_House_Value": column_num = 1; break;
+		case "Median_Income": column_num = 2; break;
+		case "Median_Age": column_num = 3; break;
+		case "Tot_Rooms": column_num = 4; break;
+		case "Tot_Bedrooms": column_num = 5; break;
+		case "Population": column_num = 6; break;
+		case "Households": column_num = 7; break;
+		case "Latitude": column_num = 8; break;
+		case "Longitude": column_num = 9; break;
+		case "Distance_to_coast": column_num = 10; break;
+		case "Distance_to_LA": column_num = 11; break;
+		case "Distance_to_SanDiego": column_num = 12; break;
+		case "Distance_to_SanJose": column_num = 13; break;
+		case "Distance_to_SanFrancisco": column_num = 14; break;
+		case "ID": column_num = 15; break;
+        default:
+            console.log("ERROR: unable to obtain column with name: " + column)
+            res.json("ERROR: unable to obtain column with name: " + column)
+            break;
+	}
+    if (column_num != -1) {
+        let result = JSON.parse(JSON.stringify(analytics.getColumn(constraint_array, column_num)))
+        console.log("api/column GET request was successful")
+        res.json(result)
     }
 })
 

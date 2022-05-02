@@ -1,8 +1,8 @@
-import './App.css';
-import TwoSidedSlider from './components/TwoSidedSlider';
+import './Data.css';
+import TwoSidedSlider from '../components/TwoSidedSlider';
 import {useEffect, useState} from 'react'
-import Card from './components/Card';
-import AddCard from './components/AddCard';
+import Card from '../components/Card';
+import AddCard from '../components/AddCard';
 
 const minMedianHousePrice = 0
 const maxMedianHousePrice = 500000
@@ -18,7 +18,7 @@ let setCardContainerOuter
 
 fetchAllData() //Display data on initial run
 
-function App() {
+function Data() {
   const [medianHousePrice, setMedianHousePrice] = useState([minMedianHousePrice, maxMedianHousePrice])
   const [latitude, setLatitude] = useState([minLatitudeLongitude, maxLatitudeLongitude])
   const [longitude, setLongitude] = useState([minLatitudeLongitude, maxLatitudeLongitude])
@@ -28,33 +28,30 @@ function App() {
 
   setCardContainerOuter = setCardContainer //Pass the method outside so that other functions in the file can control the state
 
-  const fetchNext = () => {
-    setMaxShow(maxShow+Math.min(50, cardContainer.length - tempCardContainer.length))
-    setTempCardContainer(cardContainer.slice(0, maxShow))
-  }
-
   useEffect(() => {
     console.log("Update on cardcontainer:", cardContainer)
     if(cardContainer.length >= 0) {
       setTempCardContainer(cardContainer.slice(0, maxShow))
     }
-  }, [cardContainer])
+  }, [cardContainer, tempCardContainer, maxShow])
 
   
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-      //Lifted from W3 docs with some modification: https://www.w3docs.com/snippets/javascript/how-to-check-if-user-has-scrolled-to-the-bottom-of-the-page.htm
-      if(window.scrollY + window.innerHeight > document.body.clientHeight) {
-        if(maxShow < cardContainer.length) {
-          fetchNext()
+    window.addEventListener('scroll', () => { 
+          //Lifted from W3 docs with some modification: https://www.w3docs.com/snippets/javascript/how-to-check-if-user-has-scrolled-to-the-bottom-of-the-page.htm
+          if(window.scrollY + window.innerHeight > document.body.clientHeight) {
+            if(maxShow < cardContainer.length) {
+              setMaxShow(maxShow+Math.min(50, cardContainer.length - tempCardContainer.length))
+              setTempCardContainer(cardContainer.slice(0, maxShow))
+            }
+          }
         }
-      }
-    })
+    )
 
-    return () => {
-      window.removeEventListener('scroll')
-    }
-  }, [])
+    // return () => {
+    //   window.removeEventListener('scroll')
+    // }
+  }, [cardContainer, tempCardContainer, maxShow])
 
   // Barebones HTML for the webpage
   return (
@@ -184,4 +181,4 @@ async function postFunc(req, sendText){
   
 }
 
-export default App;
+export default Data;
