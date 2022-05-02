@@ -107,6 +107,7 @@ async function updateData(entryId, entryState) {
     })})
     .then(response => response.json())
     .then(responseJSON => console.log(responseJSON)) //TODO: Change the existing set of data on the client to the one returned by the server.
+    displayAllData(fetchAllData())
 }
 
 /**
@@ -123,7 +124,9 @@ async function deleteEntry(entryId) {
     })
   }).then(response => response.json())
   .then(responseJSON => console.log(responseJSON)) //TODO: Change the existing set of data on the client to the one returned by the server. 
+  displayAllData(fetchAllData())
 }
+
 
 async function fetchFilteredData(medianHousePrice, latitude, longitude) {
   fetch('http://localhost:4000/api/getFilteredData', {
