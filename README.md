@@ -1,4 +1,4 @@
-https://github.com/raymondwzeng/cs180-housing-project/actions/workflows/node.js.yml/badge.svg
+![Test Cases Status](https://github.com/raymondwzeng/cs180-housing-project/actions/workflows/node.js.yml/badge.svg)
 
 # Untitled CS180 Project
 
