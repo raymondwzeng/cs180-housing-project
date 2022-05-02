@@ -110,10 +110,9 @@ router.patch('/cards', (req, res) => {
 })
 
 /*
-API call to get a single column from the neighborhood list using a constraint array.
-req: 1) the string name of the column to get data from.
-    2) a constraint_array of the same form as the api/getFilteredData endpoint.
-res: an array of numbers from the specified column with the specified constraints.
+API call to get a single column from the neighborhood list.
+req: a url containing a parameter for the string column_name to obtain.
+res: an array of numbers from the specified column.
 */
 router.get('/column', (req, res) => {
     console.log("api/column call:")
@@ -123,6 +122,7 @@ router.get('/column', (req, res) => {
     column = queryString.get('column_name')
     console.log(column)
 
+    //TODO: either extend this API call to accept constraint_array info, or remove filtering from the analytics.getColumn() entirely
     const constraint_array = {
         minMedianHousePrice: 0,
         maxMedianHousePrice: 500000,
