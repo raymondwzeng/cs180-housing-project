@@ -2,7 +2,7 @@ import ReactSlider from 'react-slider'
 import './Slider.css'
 
 /*
-The TwoSidedSlider originally within App.js. Takes in no new parameters.
+The TwoSidedSlider originally within Data.js. Takes in no new parameters.
 
 Note: The state should be established in the parent component, and onChange should change this.
 */

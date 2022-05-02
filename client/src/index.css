@@ -13,5 +13,18 @@ code {
 }
 
 .hidden {
-  display: none;
+  visibility: hidden;
+}
+
+.flex-horizontal {
+  display: flex;
+  flex-direction: row;  
+}
+
+.big-font {
+  font-size: large;
+}
+
+.small-horizontal-padding {
+  padding: 0 1em;
 }
