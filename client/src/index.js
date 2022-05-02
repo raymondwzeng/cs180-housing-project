@@ -4,6 +4,7 @@ import Data from './routes/Data';
 import reportWebVitals from './reportWebVitals';
 import {Routes, Route, BrowserRouter} from 'react-router-dom'
 import Graph from './routes/Graphs';
+import "./index.css"
 
 
 const root = createRoot(document.getElementById('root'))
