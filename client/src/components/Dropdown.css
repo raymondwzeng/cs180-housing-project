@@ -1,0 +1,18 @@
+/*
+    Dropdown.css
+
+    Small stylings for the dropdown menu
+*/
+
+.dropdown-display {
+    font-size: large;
+    width: fit-content;
+}
+
+.dropdown-display > .select-item:hover, .dropdown-display > .dropdown-select > div:hover {
+    background-color: aliceblue;
+}
+
+.chosenItem {
+    background-color: aqua;
+}
