@@ -115,7 +115,7 @@ req: 1) the string name of the column to get data from.
     2) a constraint_array of the same form as the api/getFilteredData endpoint.
 res: an array of numbers from the specified column with the specified constraints.
 */
-router.post('/column', (req, res) => {
+router.get('/column', (req, res) => {
     console.log("api/column call:")
     console.log(req.body)
 
