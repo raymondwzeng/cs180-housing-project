@@ -111,9 +111,9 @@ router.patch('/cards', (req, res) => {
 
 /*
 API call to get a single column from the neighborhood list using a constraint array.
-req: An array of the 15 values needed to for the neighborhood constructor.
-    id value within the array will be the one that will be updated in the NeighborhoodList.
-res: string message saying whether or not delete operation was successful.
+req: 1) the string name of the column to get data from.
+    2) a constraint_array of the same form as the api/getFilteredData endpoint.
+res: an array of numbers from the specified column with the specified constraints.
 */
 router.get('/column', (req, res) => {
     console.log("api/column call:")
