@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { defaultHeaders } from "../App";
+import App, { defaultHeaders } from "../App";
 import EditAttributes from "./EditAttributes";
 
 class AddCard extends Component {
@@ -52,6 +52,7 @@ class AddCard extends Component {
             body: JSON.stringify({...sendState})})
             .then(response => response.json())
             .then(responseJSON => console.log(responseJSON)) //TODO: Update the set of cards.
+        App.displayAllData(App.fetchAllData())
     }
 
     render() {
@@ -67,5 +68,6 @@ class AddCard extends Component {
         )
     }
 }
+
 
 export default AddCard
