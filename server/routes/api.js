@@ -117,10 +117,20 @@ res: an array of numbers from the specified column with the specified constraint
 */
 router.get('/column', (req, res) => {
     console.log("api/column call:")
-    console.log(req.body)
+    let paramString = req.url.split('?')[1];
+    let queryString = new URLSearchParams(paramString);
 
-    constraint_array = req.body.constraint_array;
-    column = req.body.column_name;
+    column = queryString.get('column_name')
+    console.log(column)
+
+    const constraint_array = {
+        minMedianHousePrice: 0,
+        maxMedianHousePrice: 500000,
+        minLatitude: -150,
+        maxLatitude: 150,
+        minLongitude: -150,
+        maxLongitude: 150
+    }
 
     //determine the column number based on the column name
     column_num = -1;
@@ -147,6 +157,7 @@ router.get('/column', (req, res) => {
 	}
     if (column_num != -1) {
         let result = JSON.parse(JSON.stringify(analytics.getColumn(constraint_array, column_num)))
+        console.log("api/column GET request was successful")
         res.json(result)
     }
 })
