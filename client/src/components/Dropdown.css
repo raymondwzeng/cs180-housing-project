@@ -12,3 +12,7 @@
 .dropdown-display > .select-item:hover, .dropdown-display > .dropdown-select > div:hover {
     background-color: aliceblue;
 }
+
+.chosenItem {
+    background-color: aqua;
+}
