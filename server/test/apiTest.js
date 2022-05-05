@@ -126,7 +126,31 @@ describe("Testing api/cards as a whole", () => {
                 minLatitude: -150,
                 maxLatitude: 150,
                 minLongitude: -150,
-                maxLongitude: 150
+                maxLongitude: 150,
+                minMedianIncome: 0,
+                maxMedianIncome: 50000000.1,
+                minID: 0,
+                maxID: 300000,
+                minMedianAge:0,
+                maxMedianAge:100,
+                minTotalRooms:0,
+                maxTotalRooms:100000,
+                minTotalBedrooms:0,
+                maxTotalBedrooms:100000,
+                minPopulation:0,
+                maxPopulation:150000,
+                minHouseholds:0,
+                maxHouseholds:10000,
+                minDistanceToCoast:0,
+                maxDistanceToCoast:100000000000,
+                minDistanceToLA:0,
+                maxDistanceToLA:100000000000,
+                minDistanceToSD:0,
+                maxDistanceToSD:100000000000,
+                minDistanceToSJ:0,
+                maxDistanceToSJ:100000000000,
+                minDistanceToSF:0,
+                maxDistanceToSF:100000000000
             })
             .end((err, res) => {
                 expect(err).to.be.null

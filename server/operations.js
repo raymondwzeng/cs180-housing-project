@@ -59,7 +59,7 @@ class OperationsLayer {
 		.filter( element => element.population >= constraintArray.minPopulation)
 		.filter( element => element.population <= constraintArray.maxPopulation)
 		.filter( element => element.households >= constraintArray.minHouseholds)
-		.filter( element => element.households <= constraintArray.maxHousehold)
+		.filter( element => element.households <= constraintArray.maxHouseholds)
 		.filter( element => element.distance_to_coast >= constraintArray.minDistanceToCoast)
 		.filter( element => element.distance_to_coast <= constraintArray.maxDistanceToCoast)
 		.filter( element => element.distance_to_LA >= constraintArray.minDistanceToLA)
