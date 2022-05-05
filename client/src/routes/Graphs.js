@@ -152,7 +152,7 @@ class Graph extends Component{
 
             <div id="graphs">
                 <XYChart height={300} xScale={{ type: 'band' }} yScale={{ type: 'linear' }}>
-                    <GlyphSeries data={this.state.currentData} {...accessors}/>
+                    <GlyphSeries dataKey="Scatterplot Data" data={this.state.currentData} {...accessors}/>
                     <Axis key={`axis-bottom`} label={this.state.selectedColumn.replaceAll("_", " ") + (units[this.state.selectedColumn] != null ? units[this.state.selectedColumn] : "")} orientation="bottom"/>
                     <Axis key={`axis-side`} label="Median House Value" orientation="left"/>
                     <Tooltip
@@ -166,9 +166,20 @@ class Graph extends Component{
                         )}/>
                 </XYChart>
                 <XYChart height={300} xScale={{type: 'band'}} yScale={{type: 'linear'}}>
-                    <BarSeries data={this.state.bucketifiedData} {...accessors}/>
-                    <Axis key={`axis-bottom`} label={this.state.selectedColumn}/>
+                    <BarSeries dataKey="Histogram Data" data={this.state.bucketifiedData} {...accessors}/>
+                    <Axis key={`axis-bottom`} label={this.state.selectedColumn} orientation="bottom"/>
                     <Axis key={`axis-side`} label="Occurences" orientation="left"/>
+                    <Tooltip
+                        showSeriesGlyphs
+                        renderTooltip={({tooltipData, _}) => (
+                                <div>
+                                    {console.log(tooltipData.nearestDatum)}
+                                    {'Value: '}
+                                    {accessors.xAccessor(tooltipData.nearestDatum.datum)}
+                                    {'\n Occurrences: '}
+                                    {accessors.yAccessor(tooltipData.nearestDatum.datum)}
+                                </div>
+                        )}/>
                 </XYChart>
             </div>
         </div>
