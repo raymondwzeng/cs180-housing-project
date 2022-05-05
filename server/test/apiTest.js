@@ -45,6 +45,18 @@ describe("Testing api/neighborhoodList", () => {
         let medianHousePrice = [100000, 150000]
         let latitude = [37, 38]
         let longitude = [-122, -121]
+        let id =[0,30000]
+        let median_age=[0,1000]
+        let median_income=[0,5000000.1]
+        let total_rooms=[0,100000]
+        let total_bedrooms=[0,100000]
+        let population=[0,150000]
+        let households=[0,10000]
+        let distance_to_coast=[0,100000000000]
+        let distance_to_LA=[0,10000000000]
+        let distance_to_SD=[0,10000000000]
+        let distance_to_SJ=[0,10000000000]
+        let distance_to_SF=[0,10000000000]
         //TODO: Add additional filters to the req once those filters are added to /api/getFilteredData
         req = JSON.stringify({
             minMedianHousePrice: medianHousePrice[0],
@@ -52,7 +64,31 @@ describe("Testing api/neighborhoodList", () => {
             minLatitude: latitude[0],
             maxLatitude: latitude[1],
             minLongitude: longitude[0],
-            maxLongitude: longitude[1]
+            maxLongitude: longitude[1],
+            minMedianIncome: median_income[0],
+            maxMedianIncome: median_income[1],
+            minID: id[0],
+            maxID: id[1],
+            minMedianAge:median_age[0],
+            maxMedianAge:median_age[1],
+            minTotalRooms:total_rooms[0],
+            maxTotalRooms:total_rooms[1],
+            minTotalBedrooms:total_bedrooms[0],
+            maxTotalBedrooms:total_bedrooms[1],
+            minPopulation:population[0],
+            maxPopulation:population[1],
+            minHouseholds:households[0],
+            maxHouseholds:households[1],
+            minDistanceToCoast:distance_to_coast[0],
+            maxDistanceToCoast:distance_to_coast[1],
+            minDistanceToLA:distance_to_LA[0],
+            maxDistanceToLA:distance_to_LA[1],
+            minDistanceToSD:distance_to_SD[0],
+            maxDistanceToSD:distance_to_SD[1],
+            minDistanceToSJ:distance_to_SJ[0],
+            maxDistanceToSJ:distance_to_SJ[1],
+            minDistanceToSF:distance_to_SF[0],
+            maxDistanceToSF:distance_to_SF[1]
           })
 
         chai.request("http://localhost:4000")
