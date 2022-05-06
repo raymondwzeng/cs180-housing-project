@@ -145,6 +145,7 @@ class Graph extends Component{
     render() {
         return(
         <div>
+            <h1>1990 Housing Data Viewer - Graphs</h1>
             <div className="flex-horizontal">
             <div className="big-font small-horizontal-padding">Choose a column to compare against median housing:</div>
             <Dropdown items={items} changed={this.changeSelectedData} selected={this.state.selectedColumn}/>
@@ -173,7 +174,6 @@ class Graph extends Component{
                         showSeriesGlyphs
                         renderTooltip={({tooltipData, _}) => (
                                 <div>
-                                    {console.log(tooltipData.nearestDatum)}
                                     {'Value: '}
                                     {accessors.xAccessor(tooltipData.nearestDatum.datum)}
                                     {'\n Occurrences: '}
