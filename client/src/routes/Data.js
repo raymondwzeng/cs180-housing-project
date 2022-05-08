@@ -3,6 +3,8 @@ import TwoSidedSlider from '../components/TwoSidedSlider';
 import {useEffect, useState} from 'react'
 import Card from '../components/Card';
 import AddCard from '../components/AddCard';
+import "bootstrap/dist/css/bootstrap.min.css";
+import Navbar from '../components/navbar';
 
 const minMedianHousePrice = 0
 const maxMedianHousePrice = 500001
@@ -43,6 +45,7 @@ export const defaultHeaders = {
 let setCardContainerOuter
 
 fetchAllData() //Display data on initial run
+
 
 function Data() {
   // Functions to get the slider states
@@ -97,6 +100,9 @@ function Data() {
   // Barebones HTML for the webpage
   return (
     <div className="page-contents">
+      <div id='navigation-bar'>
+        <Navbar />
+      </div>
       <h1>1990 Housing Data Viewer</h1>
       <h3>A reminder that today's economy is screwed for the rest of us</h3>
         {/* Two Sided Sliders for all of the data values*/}
