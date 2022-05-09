@@ -1,5 +1,10 @@
 /* TODO Add all your css styling here */
 
+.navigation-bar{
+  position:realtive;
+  z-index: 10;
+}
+
 .page-contents{
   display: flex;
   align-items: center;
@@ -15,6 +20,7 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
 
 #card-container {
   width: 50%;
@@ -37,3 +43,4 @@
   height:30px;
   width:200px;
 }
+

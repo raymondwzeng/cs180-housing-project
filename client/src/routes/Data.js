@@ -3,7 +3,6 @@ import TwoSidedSlider from '../components/TwoSidedSlider';
 import {useEffect, useState} from 'react'
 import Card from '../components/Card';
 import AddCard from '../components/AddCard';
-import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from '../components/navbar';
 
 const minMedianHousePrice = 0
@@ -99,8 +98,11 @@ function Data() {
 
   // Barebones HTML for the webpage
   return (
+    // <div className="navigation-bar">
+    //   <Navbar />  can't seen to have the navbar be implemented here
+    // </div>
     <div className="page-contents">
-      <div id='navigation-bar'>
+      <div className="navigation-bar">
         <Navbar />
       </div>
       <h1>1990 Housing Data Viewer</h1>

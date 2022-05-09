@@ -1,11 +1,11 @@
 import React from "react";
-//import Navbar from 'react-bootstrap/Navbar'
+
 
 const Navbar = () => {
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-blue">
-      <a className="navbar-brand" href="/">
-        Home
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <a className="navbar-brand" href="">
+        1990 Housing Data
       </a>
       <button
         className="navbar-toggler"
@@ -22,12 +22,12 @@ const Navbar = () => {
       <div className="collapse navbar-collapse" id="navbarNavDropdown">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link" href="graph">
+            <a className="nav-link" href="/">
               View Data
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="analytics">
+            <a className="nav-link" href="graph">
               Analytics
             </a>
           </li>
