@@ -1,0 +1,29 @@
+.navbar {
+    padding: 0.5rem 0;
+}
+
+.bg-light {
+    background-color: lightgrey;
+}
+
+.full-width {
+    width: 100%;
+}
+
+ul {
+    width: fit-content;
+}
+
+li {
+    margin-left: 1rem;
+    list-style-type: none;
+}
+
+a {
+    color: rgb(119, 119, 119);
+    text-decoration: none;
+}
+
+a:hover {
+    color: darkgrey;
+}
