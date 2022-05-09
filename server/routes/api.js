@@ -13,18 +13,20 @@ router.post('/test', (req, res) => {
 
 router.post('/neighborhoodList', (req, res) => {
     console.log("api/neighborhoodList call:")
-    console.log(req.body)
+    //console.log(req.body)
 
     var jsonString = JSON.stringify(OperationsLayer.getNeighborhoodList());
     var jsonParse = JSON.parse(jsonString)
+    console.log(jsonParse.length + " neighborhoods were successfully queried!")
     res.json(jsonParse);
 })
 
 router.post('/getFilteredData', (req, res) => {
     console.log("api/getFilteredData call:")
-    console.log(req.body)
+    //console.log(req.body)
 
     let result = JSON.parse(JSON.stringify(analytics.filterByAll(req.body)))
+    console.log(result.length + " neighborhoods were successfully queried!")
     res.json(result)
 })
 
@@ -129,7 +131,31 @@ router.get('/column', (req, res) => {
         minLatitude: -150,
         maxLatitude: 150,
         minLongitude: -150,
-        maxLongitude: 150
+        maxLongitude: 150,
+        minMedianIncome: 0,
+        maxMedianIncome: 50000000.1,
+        minID: 0,
+        maxID: 300000,
+        minMedianAge:0,
+        maxMedianAge:100,
+        minTotalRooms:0,
+        maxTotalRooms:100000,
+        minTotalBedrooms:0,
+        maxTotalBedrooms:100000,
+        minPopulation:0,
+        maxPopulation:150000,
+        minHouseholds:0,
+        maxHouseholds:10000,
+        minDistanceToCoast:0,
+        maxDistanceToCoast:100000000000,
+        minDistanceToLA:0,
+        maxDistanceToLA:100000000000,
+        minDistanceToSD:0,
+        maxDistanceToSD:100000000000,
+        minDistanceToSJ:0,
+        maxDistanceToSJ:100000000000,
+        minDistanceToSF:0,
+        maxDistanceToSF:100000000000
     }
 
     //determine the column number based on the column name
