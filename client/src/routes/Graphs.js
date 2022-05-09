@@ -4,7 +4,7 @@
     The place where we will be comparing and contrasting various columns
 */
 
-import { GlyphSeries, XYChart, Tooltip, Axis } from "@visx/xychart"
+import { GlyphSeries, XYChart, Tooltip, Axis, BarSeries } from "@visx/xychart"
 import { Component } from "react";
 import Dropdown from "../components/Dropdown"
 import { defaultHeaders } from "./Data";
@@ -29,20 +29,26 @@ const units = {
     "Median_Income": "(thousands of USD)"
 }
   
-  const accessors = {
+const accessors = {
     xAccessor: d => d.x,
     yAccessor: d => d.y,
-  };
+};
 
 class Graph extends Component{
     constructor(props) {
         super(props)
         this.state = {
             selectedColumn: "",
-            currentData: []
+            currentData: [],
+            bucketifiedData: []
+                /*
+                    Schema of bucketifiedData:
+                    "bucketMin-bucketMax": [array of values]
+                */
         }
         this.changeSelectedData = this.changeSelectedData.bind(this)
         this.getColumnFromServer = this.getColumnFromServer.bind(this)
+        this.bucketify = this.bucketify.bind(this)
     }
 
     /**
@@ -86,6 +92,44 @@ class Graph extends Component{
                 newData[index++].x = element
             })
             this.setState({currentData: newData.slice(0, 2000).sort((a, b) => a.x - b.x)})
+            this.bucketify(newData.sort((a, b) => a.x - b.x)) //A hacky solution to sort twice, but we want as much data for this.
+        })
+    }
+
+    /**
+     * Turns the column and moves them into 10 buckets. Bucket size is even, calculated by taking the range of the parameters.
+     * @param {Array} newData - The new data to add in. Passed because the state might not update fast enough.
+     */
+    bucketify(newData) {
+        const min = newData[0].x
+        const max = newData[newData.length - 1].x
+        const range = (max - min)
+        const numberOfBuckets = 10 //Can change later
+        let currentBucketMin = min
+        let currentBucketMax = min + (range / numberOfBuckets)
+        let bucketIndex = 0
+        let bucketDictState = String(currentBucketMin.toFixed(2))
+        let bucketState = new Map()
+        bucketState.set(bucketDictState, [])
+        newData.forEach(element => { //Since they're already sorted, we can add them into each bucket or increase the bucket 
+            while(element.x >= currentBucketMax) {
+                currentBucketMin = min + ((range / numberOfBuckets) * bucketIndex)
+                currentBucketMax = min + ((range / numberOfBuckets) * (bucketIndex + 1))
+                bucketDictState = String(currentBucketMin.toFixed(2))
+                bucketState.set(bucketDictState, [])
+                bucketIndex++
+            }
+            bucketState.get(bucketDictState).push(element)
+        })
+        // console.log(bucketState)
+        let bucketifiedData = []
+        bucketState.forEach((key, value) => {
+            let newData = {x: Number(value), y: key.length}
+            bucketifiedData.push(newData)
+        })
+        // console.log(bucketifiedData)
+        this.setState({
+            bucketifiedData: bucketifiedData
         })
     }
 
@@ -101,6 +145,7 @@ class Graph extends Component{
     render() {
         return(
         <div>
+            <h1>1990 Housing Data Viewer - Graphs</h1>
             <div className="flex-horizontal">
             <div className="big-font small-horizontal-padding">Choose a column to compare against median housing:</div>
             <Dropdown items={items} changed={this.changeSelectedData} selected={this.state.selectedColumn}/>
@@ -108,7 +153,7 @@ class Graph extends Component{
 
             <div id="graphs">
                 <XYChart height={300} xScale={{ type: 'band' }} yScale={{ type: 'linear' }}>
-                    <GlyphSeries data={this.state.currentData} {...accessors}/>
+                    <GlyphSeries dataKey="Scatterplot Data" data={this.state.currentData} {...accessors}/>
                     <Axis key={`axis-bottom`} label={this.state.selectedColumn.replaceAll("_", " ") + (units[this.state.selectedColumn] != null ? units[this.state.selectedColumn] : "")} orientation="bottom"/>
                     <Axis key={`axis-side`} label="Median House Value" orientation="left"/>
                     <Tooltip
@@ -119,6 +164,21 @@ class Graph extends Component{
                             {', '}
                             {accessors.yAccessor(tooltipData.nearestDatum.datum)}
                             </div>
+                        )}/>
+                </XYChart>
+                <XYChart height={300} xScale={{type: 'band'}} yScale={{type: 'linear'}}>
+                    <BarSeries dataKey="Histogram Data" data={this.state.bucketifiedData} {...accessors}/>
+                    <Axis key={`axis-bottom`} label={this.state.selectedColumn} orientation="bottom"/>
+                    <Axis key={`axis-side`} label="Occurences" orientation="left"/>
+                    <Tooltip
+                        showSeriesGlyphs
+                        renderTooltip={({tooltipData, _}) => (
+                                <div>
+                                    {'Value: '}
+                                    {accessors.xAccessor(tooltipData.nearestDatum.datum)}
+                                    {'\n Occurrences: '}
+                                    {accessors.yAccessor(tooltipData.nearestDatum.datum)}
+                                </div>
                         )}/>
                 </XYChart>
             </div>

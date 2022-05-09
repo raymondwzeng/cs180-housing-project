@@ -13,12 +13,21 @@ code {
 }
 
 .hidden {
-  visibility: hidden;
+  display: none;
 }
 
 .flex-horizontal {
   display: flex;
   flex-direction: row;  
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.align-center {
+  justify-content: center;
 }
 
 .big-font {
@@ -27,4 +36,8 @@ code {
 
 .small-horizontal-padding {
   padding: 0 1em;
+}
+
+h1 {
+  text-align: center;
 }

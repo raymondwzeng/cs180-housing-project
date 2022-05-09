@@ -6,7 +6,10 @@
 
 .dropdown-display {
     font-size: large;
-    width: fit-content;
+    background-color: lightblue;
+    padding: 0.2em;
+    border-radius: 10px;
+    width: 20rem;
 }
 
 .dropdown-display > .select-item:hover, .dropdown-display > .dropdown-select > div:hover {
@@ -15,4 +18,20 @@
 
 .chosenItem {
     background-color: aqua;
+}
+
+/* Copied from Card.css. Consider merging into index.css. */
+.dropdown-display > div > img {
+    transition-duration: 200ms;
+    margin-left: auto;
+    max-height: 1.5em;
+}
+/* 
+.dropdown-display > div > img:hover {
+    margin-left: auto;
+    max-height: 1em;
+} */
+
+.dropdown-display > div > img.down {
+    transform: rotate(-90deg);
 }

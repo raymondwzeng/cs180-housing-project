@@ -33,8 +33,11 @@ class Dropdown extends Component{
 
     render() {
         return(   
-        <div className="dropdown-display">
-            <div className="select-item" onClick={this.toggleSelectState}>Select an item...</div>
+        <div className="dropdown-display flex">
+            <div className="flex-horizontal" onClick={this.toggleSelectState}>
+                <div className="select-item flex align-center">Select an item...</div>
+                <img id='dropdown-arrow' className={this.state.showSelection? `down` : `up`}  src="/dropdown_arrow.png" alt="dropdown arrow" onClick={this.toggleSelectState}/>
+            </div>
             <div className={this.state.showSelection ? `dropdown-select` : `hidden`}>
                 {this.props.items.map(element => {
                     return (<div key={element} className={element === this.state.selectedItem ? "chosenItem" : ""} onClick={(event) => this.changeSelected(event)}>{element.replaceAll("_", " ")}</div>)
