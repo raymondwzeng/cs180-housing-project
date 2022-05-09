@@ -98,13 +98,11 @@ function Data() {
 
   // Barebones HTML for the webpage
   return (
-    // <div className="navigation-bar">
-    //   <Navbar />  can't seen to have the navbar be implemented here
-    // </div>
-    <div className="page-contents">
-      <div className="navigation-bar">
+    <div>
+      <div>
         <Navbar />
       </div>
+      <div className="page-contents">
       <h1>1990 Housing Data Viewer</h1>
       <h3>A reminder that today's economy is screwed for the rest of us</h3>
         {/* Two Sided Sliders for all of the data values*/}
@@ -180,6 +178,8 @@ function Data() {
         })}
       </div>
     </div>
+    </div>
+    
   );
 }
 
