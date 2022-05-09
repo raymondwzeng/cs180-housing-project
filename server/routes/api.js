@@ -13,18 +13,20 @@ router.post('/test', (req, res) => {
 
 router.post('/neighborhoodList', (req, res) => {
     console.log("api/neighborhoodList call:")
-    console.log(req.body)
+    //console.log(req.body)
 
     var jsonString = JSON.stringify(OperationsLayer.getNeighborhoodList());
     var jsonParse = JSON.parse(jsonString)
+    console.log(jsonParse.length + " neighborhoods were successfully queried!")
     res.json(jsonParse);
 })
 
 router.post('/getFilteredData', (req, res) => {
     console.log("api/getFilteredData call:")
-    console.log(req.body)
+    //console.log(req.body)
 
     let result = JSON.parse(JSON.stringify(analytics.filterByAll(req.body)))
+    console.log(result.length + " neighborhoods were successfully queried!")
     res.json(result)
 })
 
