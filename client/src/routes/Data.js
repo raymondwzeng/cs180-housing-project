@@ -3,6 +3,7 @@ import TwoSidedSlider from '../components/TwoSidedSlider';
 import {useEffect, useState} from 'react'
 import Card from '../components/Card';
 import AddCard from '../components/AddCard';
+import Navbar from '../components/navbar';
 
 const minMedianHousePrice = 0
 const maxMedianHousePrice = 500001
@@ -43,6 +44,7 @@ export const defaultHeaders = {
 let setCardContainerOuter
 
 fetchAllData() //Display data on initial run
+
 
 function Data() {
   // Functions to get the slider states
@@ -88,15 +90,53 @@ function Data() {
           }
         }
     )
-
-    // return () => {
-    //   window.removeEventListener('scroll')
-    // }
   }, [cardContainer, tempCardContainer, maxShow])
+
+  /**
+   * Updates the data on the server side, specifically /api/cards, with a PATCH request.
+   * @param {string} entryId - The id of the element you wish to update.
+   * @param {Object} entryState - The JSONified state of the element. You do not need to remove the 'isEditMode' property.
+   */
+  async function updateData(entryId, entryState) {
+    delete entryState['isEditMode'] //Safe delete, remove unused state
+    console.log("Entry", entryId, "updated with", entryState)
+    await fetch('http://localhost:4000/api/cards', {
+      method: 'PATCH',
+      headers: defaultHeaders,
+      body: JSON.stringify({
+        id: entryId,
+        state: entryState
+      })})
+      .then(response => response.json())
+      .then(responseJSON => console.log(responseJSON)) //TODO: Change the existing set of data on the client to the one returned by the server.
+      displayAllData(fetchFilteredData(medianHousePrice, medianIncome, medianAge, totalRooms, totalBedrooms, population, households, latitude, longitude, distanceToCoast, distanceToLA, distanceToSD, distanceToSJ, distanceToSF, id))
+  }
+
+  /**
+   * Sends a DELETE request to /api/cards with the id of entry to remove.
+   * @param {string} entryId - The ID of the element you wish to remove.
+   */
+  async function deleteEntry(entryId) {
+    console.log("Entry", entryId, "removed")
+    await fetch('http://localhost:4000/api/cards', {
+      method: 'DELETE',
+      headers: defaultHeaders,
+      body: JSON.stringify({
+        id: entryId
+      })
+    }).then(response => response.json())
+    .then(responseJSON => console.log(responseJSON)) //TODO: Change the existing set of data on the client to the one returned by the server. 
+    displayAllData(fetchFilteredData(medianHousePrice, medianIncome, medianAge, totalRooms, totalBedrooms, population, households, latitude, longitude, distanceToCoast, distanceToLA, distanceToSD, distanceToSJ, distanceToSF, id))
+  }
+
 
   // Barebones HTML for the webpage
   return (
-    <div className="page-contents">
+    <div>
+      <div>
+        <Navbar />
+      </div>
+      <div className="page-contents">
       <h1>1990 Housing Data Viewer</h1>
       <h3>A reminder that today's economy is screwed for the rest of us</h3>
         {/* Two Sided Sliders for all of the data values*/}
@@ -172,6 +212,8 @@ function Data() {
         })}
       </div>
     </div>
+    </div>
+    
   );
 }
 
@@ -179,42 +221,6 @@ async function fetchAllData() {
   displayAllData(await postFunc('api/neighborhoodList', "api/neighborhoodList called"))
 }
 
-/**
- * Updates the data on the server side, specifically /api/cards, with a PATCH request.
- * @param {string} entryId - The id of the element you wish to update.
- * @param {Object} entryState - The JSONified state of the element. You do not need to remove the 'isEditMode' property.
- */
-async function updateData(entryId, entryState) {
-  delete entryState['isEditMode'] //Safe delete, remove unused state
-  console.log("Entry", entryId, "updated with", entryState)
-  await fetch('http://localhost:4000/api/cards', {
-    method: 'PATCH',
-    headers: defaultHeaders,
-    body: JSON.stringify({
-      id: entryId,
-      state: entryState
-    })})
-    .then(response => response.json())
-    .then(responseJSON => console.log(responseJSON)) //TODO: Change the existing set of data on the client to the one returned by the server.
-    displayAllData(fetchAllData())
-}
-
-/**
- * Sends a DELETE request to /api/cards with the id of entry to remove.
- * @param {string} entryId - The ID of the element you wish to remove.
- */
-async function deleteEntry(entryId) {
-  console.log("Entry", entryId, "removed")
-  await fetch('http://localhost:4000/api/cards', {
-    method: 'DELETE',
-    headers: defaultHeaders,
-    body: JSON.stringify({
-      id: entryId
-    })
-  }).then(response => response.json())
-  .then(responseJSON => console.log(responseJSON)) //TODO: Change the existing set of data on the client to the one returned by the server. 
-  displayAllData(fetchAllData())
-}
 
 
 async function fetchFilteredData(medianHousePrice, medianIncome, medianAge, totalRooms, totalBedrooms, population, households, latitude, longitude, distanceToCoast, distanceToLA, distanceToSD, distanceToSJ, distanceToSF, id) {
