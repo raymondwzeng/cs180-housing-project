@@ -76,7 +76,7 @@ function Data() {
     if(cardContainer.length >= 0) {
       setTempCardContainer(cardContainer.slice(0, maxShow))
     }
-  }, [cardContainer, tempCardContainer, maxShow])
+  }, [cardContainer, maxShow])
 
   
   useEffect(() => {
@@ -98,7 +98,11 @@ function Data() {
    * @param {Object} entryState - The JSONified state of the element. You do not need to remove the 'isEditMode' property.
    */
   async function updateData(entryId, entryState) {
+    // const state = Object.assign(entryState)
+    // console.log(state)
+    console.log(entryState)
     delete entryState['isEditMode'] //Safe delete, remove unused state
+    console.log(entryState)
     console.log("Entry", entryId, "updated with", entryState)
     await fetch('http://localhost:4000/api/cards', {
       method: 'PATCH',
@@ -219,8 +223,6 @@ function Data() {
 async function fetchAllData() {
   displayAllData(await postFunc('api/neighborhoodList', "api/neighborhoodList called"))
 }
-
-
 
 async function fetchFilteredData(medianHousePrice, medianIncome, medianAge, totalRooms, totalBedrooms, population, households, latitude, longitude, distanceToCoast, distanceToLA, distanceToSD, distanceToSJ, distanceToSF, id) {
   fetch('http://localhost:4000/api/getFilteredData', {
