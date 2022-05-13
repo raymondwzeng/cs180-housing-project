@@ -6,7 +6,7 @@ Note: Unlike the other components throughout the app, this one is class based.
 
 import './Card.css'
 import { Component } from 'react'
-import EditAttributes from './EditAttributes'
+import EditCard from './EditCard'
 
 class Card extends Component {
     constructor(props) {
@@ -24,6 +24,7 @@ class Card extends Component {
 
     changeValue(attributeName, value) {
         try {
+            console.log(`Setting ${attributeName} to ${value}`)
             this.setState({
                 [attributeName]: value
             })
@@ -48,14 +49,7 @@ class Card extends Component {
                     <div>Median income: ${(this.props._median_income * 10000).toPrecision(5)}</div> |
                     <div>Median age: {this.props._median_age}</div>
                 </div>
-            <div id="editCard" className={this.state.isEditMode ? `blank` : `hidden`}>{/*TODO: Fill this in, and display: NONE while doing so.*/}
-                <div id='header'>Edit Information</div>
-                <EditAttributes {...this.state} onChange={(e) => this.changeValue(e.target.id, e.target.value)}/>
-                <div id='options-div'>
-                        <button onClick={() => this.props.updateData(this.props._id, this.state)}>Update data</button>
-                        <button onClick={() => this.props.deleteEntry(this.props._id)}>Delete entry</button>
-                </div>
-            </div>
+                <EditCard {...this.state} changeValue={this.changeValue} updateData={() => this.props.updateData(this.props._id, this.state)} deleteEntry={() => this.props.deleteEntry(this.props._id)}/>
         </div>
     }
 }
