@@ -1,0 +1,14 @@
+.column-grow {
+    text-align: center;
+    width: 25%;
+}
+
+.card {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card > #keyInfo > img {
+    display: none;
+}
