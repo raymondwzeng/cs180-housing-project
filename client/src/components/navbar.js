@@ -16,6 +16,11 @@ const Navbar = () => {
               Analytics
             </a>
           </li>
+          <li className="nav-item">
+            <a className="nav-link" href="factoids">
+              Factoids
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
