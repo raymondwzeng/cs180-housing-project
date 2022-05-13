@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import {Routes, Route, BrowserRouter} from 'react-router-dom'
 import Graph from './routes/Graphs';
 import "./index.css"
+import Factoids from './routes/Factoids';
 
 
 const root = createRoot(document.getElementById('root'))
@@ -14,6 +15,7 @@ const main = (
       <Routes>
         <Route path = "/" element={<Data/>}/> 
         <Route path = "/graph" element={<Graph/>}/>
+        <Route path = "/factoids" element={<Factoids/>}/>
         {/* TODO: Replace the above path with /data, and create a separate connected homepage. */}
       </Routes>
     </BrowserRouter>
