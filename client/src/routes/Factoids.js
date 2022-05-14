@@ -47,7 +47,6 @@ export default class Factoids extends Component {
 render() {
     return (<div>
         <Navbar />
-        <h1>1990 Housing Data Viewer - Factoids</h1>
         <h2>Top 10 Neighborhoods...</h2>
         <div id="3-questions-answered" className="flex-horizontal">
             <div className="column-grow align-center">

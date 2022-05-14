@@ -43,8 +43,7 @@ export const defaultHeaders = {
 
 let setCardContainerOuter
 
-fetchAllData() //Display data on initial run
-
+fetchAllData() //Display data on initial run, when the items are rendered.
 
 function Data() {
   // Functions to get the slider states
@@ -141,7 +140,6 @@ function Data() {
         <Navbar />
       </div>
       <div className="page-contents">
-      <h1>1990 Housing Data Viewer</h1>
         {/* Two Sided Sliders for all of the data values*/}
         <div id='slider-container'>
           <div className="slider">
