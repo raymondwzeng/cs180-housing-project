@@ -53,7 +53,7 @@ render() {
                 <h3>By Highest Median House Price</h3>
                 {
                     this.state.cardContainer.slice(0, 10).map(element => {
-                        return <Card {...element} updateData={function () { }} deleteEntry={function () { }} />
+                        return <Card {...element} editingEnabled={false} />
                     })
                 }
             </div>
@@ -61,7 +61,7 @@ render() {
                 <h3>By Lowest Median House Price</h3>
                 {
                     this.state.cardContainer.slice(0, 10).map(element => {
-                        return <Card {...element} updateData={function () { }} deleteEntry={function () { }} />
+                        return <Card {...element} editingEnabled={false} />
                     })
                 }
             </div>
@@ -69,7 +69,7 @@ render() {
                 <h3>By Closest Distance to Coast</h3>
                 {
                     this.state.cardContainer.slice(0, 10).map(element => {
-                        return <Card {...element} updateData={function () { }} deleteEntry={function () { }} />
+                        return <Card {...element} editingEnabled={false} />
                     })
                 }
             </div>
@@ -77,7 +77,7 @@ render() {
                 <h3>By Highest Population</h3>
                 {
                     this.state.cardContainer.slice(0, 10).map(element => {
-                        return <Card {...element} updateData={function () { }} deleteEntry={function () { }} />
+                        return <Card {...element} editingEnabled={false} />
                     })
                 }
             </div>
