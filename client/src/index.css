@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #F9F7F3;
 }
 
 code {
@@ -41,3 +42,36 @@ code {
 h1 {
   text-align: center;
 }
+
+.small-margin-top {
+  margin-top: 1rem;
+}
+
+input[type=number] {
+  border: none;
+  border-radius: 10px;
+}
+
+button, input[type=submit] {
+  background-color: #EDDEA4;
+  border: none;
+  border-radius: 10px;
+  margin: 0.3rem;
+}
+
+button:hover, input[type=submit]:hover {
+  background-color: #eeda89;
+}
+
+/*
+Randomly-generated color pallette that might look alright
+
+Header -> #0FA3B1 ("Viridian Green")
+Cards -> #B5E2FA ("Uranian Blue")
+Background/Small details -> #F9F7F3 ("Baby Powder")
+
+Unused:
+#EDDEA4 ("Medium Champagne")
+#F7A072 ("Atomic Tangerine") -> Maybe emphasized text?
+
+*/
