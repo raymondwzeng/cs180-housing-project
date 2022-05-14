@@ -209,7 +209,7 @@ function Data() {
       <div id='card-container'>
         <AddCard cardContainerSetter={setCardContainer}/>
         {tempCardContainer.map(element => {
-          return <Card {...element} updateData={updateData} deleteEntry={deleteEntry}/>
+          return <Card {...element} editingEnabled={true} updateData={updateData} deleteEntry={deleteEntry}/>
         })}
       </div>
     </div>
