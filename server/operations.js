@@ -9,6 +9,11 @@ const Neighborhood = require('./neighborhood') // Required to call Neighborhood 
 
 let isLoaded = false
 let neighborhoodList = []
+let highMedian = []
+let lowMedian = []
+let closestCoast = []
+let highestPop = []
+
 class OperationsLayer {
 	//Singleton constructor. If data already loaded, then return the list. Otherwise, load the list.
 	constructor() {
@@ -25,7 +30,22 @@ class OperationsLayer {
 		if(!isLoaded) OperationsLayer.initializeDataLayer();
 		return neighborhoodList
 	}
-
+	static getHighestPop() {
+		if(!isLoaded) OperationsLayer.initializeDataLayer();
+		return highestPop
+	}	
+	static getHighMedianCache() {
+		if(!isLoaded) OperationsLayer.initializeDataLayer();
+		return highMedian
+	}	
+	static getLowMedianCache() {
+		if(!isLoaded) OperationsLayer.initializeDataLayer();
+		return lowMedian
+	}	
+	static getClosestCoast() {
+		if(!isLoaded) OperationsLayer.initializeDataLayer();
+		return closestCoast
+	}
 	/*
 	Function to get the entire NeighborhoodList array from the csv.
 	*/
@@ -33,7 +53,49 @@ class OperationsLayer {
 		if(!isLoaded) {
 			neighborhoodList = csv.load("./California_Houses.csv")
 			isLoaded = true
+			this.createMedianCaches();
+			this.createCloseCache();
+			this.createPopCache();
 		}
+	}
+
+	static createMedianCaches(){
+		neighborhoodList.sort(function(a,b){return a.median_value - b.median_value});
+		this.createHighCache();
+		this.createLowCache();
+		neighborhoodList.sort(function(a,b){return a.id - b.id});
+	}
+
+	static createHighCache(){
+		highMedian.splice(0,highMedian.length)
+		for(let i=0; i<20; i++){
+			highMedian.push(neighborhoodList[neighborhoodList.length-1-i]);
+		}
+	}
+
+	static createLowCache(){
+		lowMedian.splice(0,lowMedian.length)
+		for(let i=0; i<20; i++){
+			lowMedian.push(neighborhoodList[i])
+		}
+	}
+
+	static createCloseCache(){
+		closestCoast.splice(0,closestCoast.length);
+		neighborhoodList.sort(function(a,b){return a.distance_to_coast - b.distance_to_coast});
+		for(let i=0; i<20; i++){
+			closestCoast.push(neighborhoodList[i]);
+		}
+		neighborhoodList.sort(function(a,b){return a.id - b.id});
+	}
+
+	static createPopCache(){
+		highestPop.splice(0,highestPop.length);
+		neighborhoodList.sort(function(a,b){return b.population - a.population});
+		for(let i=0; i<20; i++){
+			highestPop.push(neighborhoodList[i]);
+		}
+		neighborhoodList.sort(function(a,b){return a.id - b.id});
 	}
 
 	/*

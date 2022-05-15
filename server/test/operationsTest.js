@@ -75,3 +75,19 @@ describe("operations.updateNeighborhood function", () => {
         expect(OperationsLayer.updateNeighborhood(invalidNeighborhoodData)).to.be.equal(-1);
     })
 });
+
+describe("testing creating caches", () =>{
+
+    it("Should return the highest median value of 500001", () => {
+        expect(parseInt(OperationsLayer.getHighMedianCache()[0].median_value)).to.be.equal(500001);
+    })   
+    it("Should return the lowest median value of 14999", () => {
+        expect(parseInt(OperationsLayer.getLowMedianCache()[0].median_value)).to.be.equal(14999);
+    })
+    it("Should return the shortest distance to coast of 120.....", () => {
+        expect(parseFloat(OperationsLayer.getClosestCoast()[0].distance_to_coast)).to.be.equal(120.6764466);
+    })
+    it("Should return the highest population of 35682", () => {
+        expect(parseInt(OperationsLayer.getHighestPop()[0].population)).to.be.equal(35682);
+    })
+})
