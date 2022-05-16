@@ -1,10 +1,31 @@
 const { OperationsLayer } = require('./operations')
 const Neighborhood = require('./neighborhood')
 
-function filterByAll(constraintArray) {
+export function filterByAll(constraintArray) {
 	return OperationsLayer.filterByAll(constraintArray);
 }
-function getColumn(constraintArray,x){
+
+export function getHighestMedianValue() {
+	var highestValueCache = OperationsLayer.getHighestValueCache();
+	return highestValueCache.slice(0,10)
+}
+
+export function getLowestMedianValue() {
+	var lowestValueCache = OperationsLayer.getLowestValueCache();
+	return lowestValueCache.slice(0,10)
+}
+
+export function getClosestDistanceToCoast() {
+	var closestCoastCache = OperationsLayer.getClosestCoastCache();
+	return closestCoastCache.slice(0,10)
+}
+
+export function getHighestPopulation() {
+	var highestPopulationCache = OperationsLayer.getHighestPopulationCache();
+	return highestPopulationCache.slice(0,10)
+}
+
+export function getColumn(constraintArray,x){
 	let list=OperationsLayer.filterByAll(constraintArray);
 	let column=[]
 	switch(x){
@@ -56,6 +77,3 @@ function getColumn(constraintArray,x){
 	}
 	return column;
 }
-
-exports.filterByAll = filterByAll
-exports.getColumn = getColumn
