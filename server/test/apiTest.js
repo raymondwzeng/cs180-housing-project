@@ -431,8 +431,8 @@ describe("Testing api/cache", () => {
                 expect(err).to.be.null
                 expect(res).to.be.json
                 expect(res.body.length).to.be.equal(10)
-                expect(res.body[0]).to.be.equal(parseInt(OperationsLayer.getHighestValueCache()[0]))
-                expect(res.body[10]).to.be.equal(parseInt(OperationsLayer.getHighestValueCache()[10]))
+                expect(res.body[0]).to.eql(OperationsLayer.getHighestValueCache()[0])
+                expect(res.body[9]).to.eql(OperationsLayer.getHighestValueCache()[9])
             })
     })
     it("Should receive a list of neighborhoods with the lowest median values after GET to /api/cache?lowestMedianValue", () => {
@@ -443,8 +443,8 @@ describe("Testing api/cache", () => {
                 expect(err).to.be.null
                 expect(res).to.be.json
                 expect(res.body.length).to.be.equal(10)
-                expect(res.body[0]).to.be.equal(parseInt(OperationsLayer.getLowestValueCache()[0]))
-                expect(res.body[10]).to.be.equal(parseInt(OperationsLayer.getLowestValueCache()[10]))
+                expect(res.body[0]).to.eql(OperationsLayer.getLowestValueCache()[0])
+                expect(res.body[9]).to.eql(OperationsLayer.getLowestValueCache()[9])
             })
     })
     it("Should receive a list of neighborhoods with the closest distance to the coast after GET to /api/cache?closestDistanceToCoast", () => {
@@ -455,8 +455,8 @@ describe("Testing api/cache", () => {
                 expect(err).to.be.null
                 expect(res).to.be.json
                 expect(res.body.length).to.be.equal(10)
-                expect(res.body[0]).to.be.equal(parseInt(OperationsLayer.getClosestCoastCache()[0]))
-                expect(res.body[10]).to.be.equal(parseInt(OperationsLayer.getClosestCoastCache()[10]))
+                expect(res.body[0]).to.eql(OperationsLayer.getClosestCoastCache()[0])
+                expect(res.body[9]).to.eql(OperationsLayer.getClosestCoastCache()[9])
             })
     })
     it("Should receive a list of neighborhoods with the highest populations after GET to /api/cache?highestPopulation", () => {
@@ -467,8 +467,8 @@ describe("Testing api/cache", () => {
                 expect(err).to.be.null
                 expect(res).to.be.json
                 expect(res.body.length).to.be.equal(10)
-                expect(res.body[0]).to.be.equal(parseInt(OperationsLayer.getHighestPopulationCache()[0]))
-                expect(res.body[10]).to.be.equal(parseInt(OperationsLayer.getHighestPopulationCache()[10]))
+                expect(res.body[0]).to.eql(OperationsLayer.getHighestPopulationCache()[0])
+                expect(res.body[9]).to.eql(OperationsLayer.getHighestPopulationCache()[9])
             })
     })
 })

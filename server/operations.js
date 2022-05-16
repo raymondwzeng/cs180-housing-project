@@ -151,9 +151,6 @@ class OperationsLayer {
 				//delete the neighborhood at index location i
 				csv.save(neighborhoodList, "California_Houses_Backup.csv");
 				this.updateCacheDelete(neighborhoodList[i]);
-				this.updateCacheDelete(neighborhoodList[i]);
-				this.updateCacheDelete(neighborhoodList[i]);
-				this.updateCacheDelete(neighborhoodList[i]);
 				neighborhoodList.splice(i, 1);
 				return 0; // addNeighborhood successful.
 			}	
