@@ -77,17 +77,40 @@ describe("operations.updateNeighborhood function", () => {
 });
 
 describe("testing creating caches", () =>{
-
     it("Should return the highest median value of 500001", () => {
-        expect(parseInt(OperationsLayer.getHighMedianCache()[0].median_value)).to.be.equal(500001);
+        expect(parseInt(OperationsLayer.getHighestValueCache()[0].median_value)).to.be.equal(500001);
     })   
     it("Should return the lowest median value of 14999", () => {
-        expect(parseInt(OperationsLayer.getLowMedianCache()[0].median_value)).to.be.equal(14999);
+        expect(parseInt(OperationsLayer.getLowestValueCache()[0].median_value)).to.be.equal(14999);
     })
     it("Should return the shortest distance to coast of 120.....", () => {
-        expect(parseFloat(OperationsLayer.getClosestCoast()[0].distance_to_coast)).to.be.equal(120.6764466);
+        expect(parseFloat(OperationsLayer.getClosestCoastCache()[0].distance_to_coast)).to.be.equal(120.6764466);
     })
     it("Should return the highest population of 35682", () => {
-        expect(parseInt(OperationsLayer.getHighestPop()[0].population)).to.be.equal(35682);
+        expect(parseInt(OperationsLayer.getHighestPopulationCache()[0].population)).to.be.equal(35682);
     })
+})
+
+describe("testing updating caches", () =>{
+    let neighborhoodData = [500002, 50000, 50, 3000, 1000, 30000, 2000, 38, -122, 4206.81187, 544221.0324, 723064.4512, 53978.76396, 21266.94106];
+    OperationsLayer.addNeighborhood(neighborhoodData); // Add a neighborhood to neighborhoodList to delete later
+    let lastID = OperationsLayer.getNeighborhoodList().at(-1).id;
+    let highestValueBeforeDelete = OperationsLayer.getHighestValueCache()[0].median_value; // Length of the neighborhoodList before a row is deleted
+    OperationsLayer.deleteNeighborhood(lastID); // Delete the last neighborhood
+    let highestValueAfterDelete = OperationsLayer.getHighestValueCache()[0].median_value;  // Length of the neighborhoodList after a row is deleted
+
+    OperationsLayer.updateNeighborhood([500003,5.6431,52,1274,235,558,219,37.85,-122.25,7768.086571,555194.2661,734095.2907,65287.13841,18031.04757, 4])
+    let highestValueAfterUpdate = OperationsLayer.getHighestValueCache()[0].median_value;
+    //Reset data
+    OperationsLayer.updateNeighborhood([341300,5.6431,52,1274,235,558,219,37.85,-122.25,7768.086571,555194.2661,734095.2907,65287.13841,18031.04757, 4])
+
+    it("Should return the new highest median value of 500002", () => {
+        expect(parseInt(highestValueBeforeDelete)).to.be.equal(500002);
+    }) 
+    it("Should return the previous highest median value of 500001", () => {
+        expect(parseInt(highestValueAfterDelete)).to.be.equal(500001);
+    }) 
+    it("Should update cache and return highest median value of 500003", () => {
+        expect(parseInt(highestValueAfterUpdate)).to.be.equal(500003);
+    }) 
 })
