@@ -13,17 +13,14 @@ router.post('/test', (req, res) => {
 
 router.post('/neighborhoodList', (req, res) => {
     console.log("api/neighborhoodList call:")
-    //console.log(req.body)
 
-    var jsonString = JSON.stringify(OperationsLayer.getNeighborhoodList());
-    var jsonParse = JSON.parse(jsonString)
-    console.log(jsonParse.length + " neighborhoods were successfully queried!")
-    res.json(jsonParse);
+    var result = JSON.parse(JSON.stringify(OperationsLayer.getNeighborhoodList()));
+    console.log(result.length + " neighborhoods were successfully queried!")
+    res.json(result);
 })
 
 router.post('/getFilteredData', (req, res) => {
     console.log("api/getFilteredData call:")
-    //console.log(req.body)
 
     let result = JSON.parse(JSON.stringify(analytics.filterByAll(req.body)))
     console.log(result.length + " neighborhoods were successfully queried!")
@@ -186,6 +183,44 @@ router.get('/column', (req, res) => {
         console.log("api/column GET request was successful")
         res.json(result)
     }
+})
+
+/*
+Function to get the different top 10 values from the different caches
+TODO: split /cache endpoint into 4 separate endpoints, one for each cache
+*/
+router.get('/cache', (req, res) => {
+    console.log("api/cache call:")
+
+    var cacheName = req.query.column;
+    var result;
+
+    switch(cacheName) {
+        case 'highestMedianValue':
+            result = JSON.parse(JSON.stringify(analytics.getHighestMedianValue()))
+            console.log("Got 10 highest median values")
+            break;
+        case 'lowestMedianValue':
+            result = JSON.parse(JSON.stringify(analytics.getLowestMedianValue()))
+            console.log("Got 10 lowest median values")
+            break;
+        case 'closestDistanceToCoast':
+            result = JSON.parse(JSON.stringify(analytics.getClosestDistanceToCoast()))
+            console.log("Got 10 closest distances to coast")
+            break;
+        case 'highestPopulation':
+            result = JSON.parse(JSON.stringify(analytics.getHighestPopulation()))
+            console.log("Got 10 highest populations")
+            break;
+        default:
+            console.warn(`Error while handling GET api/cache with query ${req.query}`)
+            result = {
+                error: "An unknown error has ocurred."
+            }
+            break;
+    }
+
+    res.json(result);
 })
 
 module.exports = router

@@ -421,3 +421,54 @@ describe("Testing api/column", () => {
             })
     })
 })
+
+describe("Testing api/cache", () => {
+    it("Should receive a list of neighborhoods with the highest median values after GET to /api/cache?highestMedianValue", () => {
+        const params = new URLSearchParams({column: "highestMedianValue"})
+        chai.request("http://localhost:4000")
+            .get(`/api/cache?${params}`)
+            .end((err, res) => {
+                expect(err).to.be.null
+                expect(res).to.be.json
+                expect(res.body.length).to.be.equal(10)
+                expect(res.body[0]).to.eql(OperationsLayer.getHighestValueCache()[0])
+                expect(res.body[9]).to.eql(OperationsLayer.getHighestValueCache()[9])
+            })
+    })
+    it("Should receive a list of neighborhoods with the lowest median values after GET to /api/cache?lowestMedianValue", () => {
+        const params = new URLSearchParams({column: "lowestMedianValue"})
+        chai.request("http://localhost:4000")
+            .get(`/api/cache?${params}`)
+            .end((err, res) => {
+                expect(err).to.be.null
+                expect(res).to.be.json
+                expect(res.body.length).to.be.equal(10)
+                expect(res.body[0]).to.eql(OperationsLayer.getLowestValueCache()[0])
+                expect(res.body[9]).to.eql(OperationsLayer.getLowestValueCache()[9])
+            })
+    })
+    it("Should receive a list of neighborhoods with the closest distance to the coast after GET to /api/cache?closestDistanceToCoast", () => {
+        const params = new URLSearchParams({column: "closestDistanceToCoast"})
+        chai.request("http://localhost:4000")
+            .get(`/api/cache?${params}`)
+            .end((err, res) => {
+                expect(err).to.be.null
+                expect(res).to.be.json
+                expect(res.body.length).to.be.equal(10)
+                expect(res.body[0]).to.eql(OperationsLayer.getClosestCoastCache()[0])
+                expect(res.body[9]).to.eql(OperationsLayer.getClosestCoastCache()[9])
+            })
+    })
+    it("Should receive a list of neighborhoods with the highest populations after GET to /api/cache?highestPopulation", () => {
+        const params = new URLSearchParams({column: "highestPopulation"})
+        chai.request("http://localhost:4000")
+            .get(`/api/cache?${params}`)
+            .end((err, res) => {
+                expect(err).to.be.null
+                expect(res).to.be.json
+                expect(res.body.length).to.be.equal(10)
+                expect(res.body[0]).to.eql(OperationsLayer.getHighestPopulationCache()[0])
+                expect(res.body[9]).to.eql(OperationsLayer.getHighestPopulationCache()[9])
+            })
+    })
+})
