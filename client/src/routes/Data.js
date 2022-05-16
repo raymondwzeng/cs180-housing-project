@@ -97,9 +97,7 @@ function Data() {
    * @param {Object} entryState - The JSONified state of the element. You do not need to remove the 'isEditMode' property.
    */
   async function updateData(entryId, entryState) {
-    // const state = Object.assign(entryState)
-    // console.log(state)
-    console.log(entryState)
+    delete entryState['editingEnabled']
     delete entryState['isEditMode'] //Safe delete, remove unused state
     console.log(entryState)
     console.log("Entry", entryId, "updated with", entryState)
