@@ -9,39 +9,59 @@ import Card from "../components/Card.js"
 import { Component } from "react";
 
 export default class Factoids extends Component {
-    //TODO: Remove mock data getter
-    async postFuncMock() {
-        try {
-            let response = await fetch('http://localhost:4000/api/neighborhoodList', {
-                method: 'POST',
-                headers: defaultHeaders,
-                body: JSON.stringify({
-                    firstParam: "MOCK TEST PLEASE REMOVE BEFORE PROD"
-                })
+    /**
+     * getColumns
+     * 
+     * Calls the getColumnByName for each respective method.
+     */
+    async getColumns() {
+        this.getColumnByName('highestMedianValue').then(data => {
+            this.setState({
+                highestMedianValue: data
             })
-    
-            //turn the POST response into a json file, and return the firstParam
-    
-            let data = await response.json()
-            for (var i = 0; i < data.length; i++) {
-                data[i].key = data[i]._id
-                // container.push(data[i])
-            }
-            return data
-        }
-        catch (error) {
-            console.error("ERROR: No response from server. Please check if server is running.");
-            return "ERROR: No Response From Server";
+        })
+        this.getColumnByName('lowestMedianValue').then(data => {
+            this.setState({
+                lowestMedianValue: data
+            })
+        })
+        this.getColumnByName('closestDistanceToCoast').then(data => {
+            this.setState({
+                closestDistanceToCoast: data
+            })
+        })
+        this.getColumnByName('highestPopulation').then(data => {
+            this.setState({
+                highestPopulation: data
+            })
+        })
+    }
+
+    async getColumnByName(name) {
+        try {
+            const response = await fetch('http://localhost:4000/api/cache?' + new URLSearchParams({column: name}).toString(), {
+                method: 'GET',
+                headers: defaultHeaders
+            }).then(data => data.json())
+            return response
+        } catch(error) {
+            console.error(error)
+            return null
         }
     }
 
     constructor(props) {
         super(props)
-        this.state = Object.assign({ ...props }, {cardContainer: []})
-        this.postFuncMock().then(data => {
-            this.state.cardContainer = data
-            this.forceUpdate()
-        })
+        this.state = {
+            highestMedianValue: [],
+            lowestMedianValue: [],
+            closestDistanceToCoast: [],
+            highestPopulation: []
+        }
+    }
+
+    async componentDidMount() {
+        await this.getColumns()
     }
 
 render() {
@@ -52,7 +72,7 @@ render() {
             <div className="column-grow align-center">
                 <h3>By Highest Median House Price</h3>
                 {
-                    this.state.cardContainer.slice(0, 10).map(element => {
+                    this.state.highestMedianValue.map(element => {
                         return <Card {...element} editingEnabled={false} />
                     })
                 }
@@ -60,7 +80,7 @@ render() {
             <div className="column-grow">
                 <h3>By Lowest Median House Price</h3>
                 {
-                    this.state.cardContainer.slice(0, 10).map(element => {
+                    this.state.lowestMedianValue.map(element => {
                         return <Card {...element} editingEnabled={false} />
                     })
                 }
@@ -68,7 +88,7 @@ render() {
             <div className="column-grow">
                 <h3>By Closest Distance to Coast</h3>
                 {
-                    this.state.cardContainer.slice(0, 10).map(element => {
+                    this.state.closestDistanceToCoast.map(element => {
                         return <Card {...element} editingEnabled={false} />
                     })
                 }
@@ -76,7 +96,7 @@ render() {
             <div className="column-grow">
                 <h3>By Highest Population</h3>
                 {
-                    this.state.cardContainer.slice(0, 10).map(element => {
+                    this.state.highestPopulation.map(element => {
                         return <Card {...element} editingEnabled={false} />
                     })
                 }
