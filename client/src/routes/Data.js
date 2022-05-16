@@ -43,8 +43,7 @@ export const defaultHeaders = {
 
 let setCardContainerOuter
 
-fetchAllData() //Display data on initial run
-
+fetchAllData() //Display data on initial run, when the items are rendered.
 
 function Data() {
   // Functions to get the slider states
@@ -76,7 +75,7 @@ function Data() {
     if(cardContainer.length >= 0) {
       setTempCardContainer(cardContainer.slice(0, maxShow))
     }
-  }, [cardContainer, tempCardContainer, maxShow])
+  }, [cardContainer, maxShow])
 
   
   useEffect(() => {
@@ -98,7 +97,11 @@ function Data() {
    * @param {Object} entryState - The JSONified state of the element. You do not need to remove the 'isEditMode' property.
    */
   async function updateData(entryId, entryState) {
+    // const state = Object.assign(entryState)
+    // console.log(state)
+    console.log(entryState)
     delete entryState['isEditMode'] //Safe delete, remove unused state
+    console.log(entryState)
     console.log("Entry", entryId, "updated with", entryState)
     await fetch('http://localhost:4000/api/cards', {
       method: 'PATCH',
@@ -137,8 +140,6 @@ function Data() {
         <Navbar />
       </div>
       <div className="page-contents">
-      <h1>1990 Housing Data Viewer</h1>
-      <h3>A reminder that today's economy is screwed for the rest of us</h3>
         {/* Two Sided Sliders for all of the data values*/}
         <div id='slider-container'>
           <div className="slider">
@@ -208,7 +209,7 @@ function Data() {
       <div id='card-container'>
         <AddCard cardContainerSetter={setCardContainer}/>
         {tempCardContainer.map(element => {
-          return <Card {...element} updateData={updateData} deleteEntry={deleteEntry}/>
+          return <Card {...element} editingEnabled={true} updateData={updateData} deleteEntry={deleteEntry}/>
         })}
       </div>
     </div>
@@ -220,8 +221,6 @@ function Data() {
 async function fetchAllData() {
   displayAllData(await postFunc('api/neighborhoodList', "api/neighborhoodList called"))
 }
-
-
 
 async function fetchFilteredData(medianHousePrice, medianIncome, medianAge, totalRooms, totalBedrooms, population, households, latitude, longitude, distanceToCoast, distanceToLA, distanceToSD, distanceToSJ, distanceToSF, id) {
   fetch('http://localhost:4000/api/getFilteredData', {

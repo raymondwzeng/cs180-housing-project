@@ -3,7 +3,7 @@
 }
 
 .bg-light {
-    background-color: lightgrey;
+    background-color: #0FA3B1;
 }
 
 .full-width {
@@ -15,15 +15,22 @@ ul {
 }
 
 li {
+    margin-top: auto;
     margin-left: 1rem;
     list-style-type: none;
 }
 
 a {
-    color: rgb(119, 119, 119);
+    color: #EDDEA4;
     text-decoration: none;
 }
 
 a:hover {
-    color: darkgrey;
+    color: #ffdb4d;
+}
+
+.logo-title {
+    color: #F7A072;
+    font-weight: bold;
+    font-size: x-large;
 }
