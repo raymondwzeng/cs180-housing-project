@@ -6,6 +6,9 @@ import Navbar from "../components/navbar";
 import "./Factoids.css"
 import defaultHeaders from "../routes/Data.js"
 import Card from "../components/Card.js"
+import HousePriceCard from "../components/HousePriceCard.js"
+import PopulationCard from "../components/PopulationCard.js";
+import DistanceCard from "../components/DistanceCard.js";
 import { Component } from "react";
 
 export default class Factoids extends Component {
@@ -73,7 +76,7 @@ render() {
                 <h3>By Highest Median House Price</h3>
                 {
                     this.state.highestMedianValue.map(element => {
-                        return <Card {...element} editingEnabled={false} />
+                        return <HousePriceCard {...element} editingEnabled={false} />
                     })
                 }
             </div>
@@ -81,7 +84,7 @@ render() {
                 <h3>By Lowest Median House Price</h3>
                 {
                     this.state.lowestMedianValue.map(element => {
-                        return <Card {...element} editingEnabled={false} />
+                        return <HousePriceCard {...element} editingEnabled={false} />
                     })
                 }
             </div>
@@ -89,7 +92,7 @@ render() {
                 <h3>By Closest Distance to Coast</h3>
                 {
                     this.state.closestDistanceToCoast.map(element => {
-                        return <Card {...element} editingEnabled={false} />
+                        return <DistanceCard {...element} editingEnabled={false} />
                     })
                 }
             </div>
@@ -97,7 +100,7 @@ render() {
                 <h3>By Highest Population</h3>
                 {
                     this.state.highestPopulation.map(element => {
-                        return <Card {...element} editingEnabled={false} />
+                        return <PopulationCard {...element} editingEnabled={false} />
                     })
                 }
             </div>
