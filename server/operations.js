@@ -55,9 +55,7 @@ class OperationsLayer {
 		if(!isLoaded) {
 			neighborhoodList = csv.load("./California_Houses.csv")
 			isLoaded = true
-			this.createMedianCaches();
-			this.createCloseCache();
-			this.createPopCache();
+			this.createCaches();
 		}
 	}
 
@@ -150,6 +148,7 @@ class OperationsLayer {
 			if(neighborhoodList[i].id == id){
 				//delete the neighborhood at index location i
 				csv.save(neighborhoodList, "California_Houses_Backup.csv");
+				// Search caches for the deleted value and update them if needed
 				this.updateCacheDelete(neighborhoodList[i], highestValueCache);
 				this.updateCacheDelete(neighborhoodList[i], lowestValueCache);
 				this.updateCacheDelete(neighborhoodList[i], highestPopulationCache);
