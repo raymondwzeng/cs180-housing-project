@@ -39,7 +39,7 @@ export default class Factoids extends Component {
 
     async getColumnByName(name) {
         try {
-            const response = await fetch('http://localhost:4000/api/cache?' + new URLSearchParams({column: name}).toString(), {
+            const response = await fetch('http://localhost:4000/cache/' + name, {
                 method: 'GET',
                 headers: defaultHeaders
             }).then(data => data.json())
