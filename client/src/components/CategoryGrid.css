@@ -1,0 +1,26 @@
+button {
+    transition-duration: 150ms;
+    padding: 1rem;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+button:active {
+    transform:scale(0.97);
+}
+
+.selected-item {
+    font-weight: 500;
+    background-color: #F7A072;
+}
+
+.selected-item:hover {
+    background-color: #F7A072;
+}
+
+#category-container {
+    justify-content: space-between;
+    width: 55%;
+}

@@ -6,10 +6,10 @@
 
 import { GlyphSeries, XYChart, Tooltip, Axis, BarSeries } from "@visx/xychart"
 import { Component } from "react";
-import Dropdown from "../components/Dropdown"
 import { defaultHeaders } from "./Data";
 import Navbar from '../components/navbar';
 import "./Graphs.css"
+import CategoryGrid from "../components/CategoryGrid";
 
 const items = [
     "Median_House_Value", 
@@ -146,13 +146,13 @@ class Graph extends Component{
 
     render() {
         return(
-        <div>
+        <div className="flex align-center">
             <div id='navigation-bar'>
                 <Navbar />
             </div>
-            <div className="flex-horizontal small-vertical-margin">
+            <div className="flex small-vertical-margin align-center light-background align-self-center">
             <div className="big-font small-horizontal-padding">Choose a column to compare against median housing:</div>
-            <Dropdown items={items} changed={this.changeSelectedData} selected={this.state.selectedColumn}/>
+            <CategoryGrid items={items} changed={this.changeSelectedData} selectedItem={this.state.selectedColumn}/>
             </div>
 
             <div id="container" className="flex">

@@ -63,6 +63,15 @@ button:hover, input[type=submit]:hover {
   background-color: #eeda89;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 0.3fr);
+}
+
+.align-self-center {
+  align-self: center;
+}
+
 /*
 Randomly-generated color pallette that might look alright
 
