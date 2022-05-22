@@ -28,7 +28,11 @@ const items = [
     "Distance_to_SanFrancisco"]
 
 const units = {
-    "Median_Income": "(thousands of USD)"
+    "Median_Income": "(thousands of USD)",
+    "Distance_to_LA": "(miles)",
+    "Distance_to_SanDiego": "(miles)",
+    "Distance_to_SanJose": "(miles)",
+    "Distance_to_SanFrancisco": "(miles)",
 }
   
 const accessors = {
@@ -158,9 +162,9 @@ class Graph extends Component{
             <div id="container" className="flex">
             <div className={"flex " + (this.state.selectedColumn != "" ? "light-background" : "")}>
                 <div className={"title" + (this.state.selectedColumn == "" ? " hidden" : "")}>Median House Value vs. {this.state.selectedColumn.replaceAll("_", " ")}</div>
-                <XYChart width={1000} height={300} xScale={{ type: 'band' }} yScale={{ type: 'linear' }}>
+                <XYChart width={1000} height={270} xScale={{ type: 'band' }} yScale={{ type: 'linear' }}>
                     <GlyphSeries dataKey="Scatterplot Data" data={this.state.currentData} {...accessors}/>
-                    <Axis key={`axis-bottom`} label={this.state.selectedColumn.replaceAll("_", " ") + (units[this.state.selectedColumn] != null ? units[this.state.selectedColumn] : "")} orientation="bottom"/>
+                    <Axis key={`axis-bottom`} label={this.state.selectedColumn.replaceAll("_", " ") + (units[this.state.selectedColumn] != null ? " " + units[this.state.selectedColumn] : "")} orientation="bottom"/>
                     <Axis key={`axis-side`} label="Median House Value" orientation="left"/>
                     <Tooltip
                         showSeriesGlyphs
@@ -175,9 +179,9 @@ class Graph extends Component{
             </div>
             <div className={"flex " + (this.state.selectedColumn != "" ? "light-background" : "")}>
                 <div className={"title" + (this.state.selectedColumn == "" ? " hidden" : "")}>Histogram of {this.state.selectedColumn.replaceAll("_", " ")}</div>
-                <XYChart width={1000} height={300} xScale={{type: 'band'}} yScale={{type: 'linear'}}>
+                <XYChart width={1000} height={250} xScale={{type: 'band'}} yScale={{type: 'linear'}}>
                         <BarSeries dataKey="Histogram Data" data={this.state.bucketifiedData} {...accessors}/>
-                        <Axis key={`axis-bottom`} label={this.state.selectedColumn.replaceAll("_", " ") + (units[this.state.selectedColumn] != null ? units[this.state.selectedColumn] : "")} orientation="bottom"/>
+                        <Axis key={`axis-bottom`} label={this.state.selectedColumn.replaceAll("_", " ") + (units[this.state.selectedColumn] != null ? " " + units[this.state.selectedColumn] : "")} orientation="bottom"/>
                         <Axis key={`axis-side`} label="Occurences" orientation="left"/>
                         <Tooltip
                             showSeriesGlyphs
