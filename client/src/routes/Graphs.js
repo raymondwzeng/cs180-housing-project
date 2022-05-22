@@ -9,6 +9,7 @@ import { Component } from "react";
 import Dropdown from "../components/Dropdown"
 import { defaultHeaders } from "./Data";
 import Navbar from '../components/navbar';
+import "./Graphs.css"
 
 const items = [
     "Median_House_Value", 
@@ -149,13 +150,14 @@ class Graph extends Component{
             <div id='navigation-bar'>
                 <Navbar />
             </div>
-            <div className="flex-horizontal small-margin-top">
+            <div className="flex-horizontal small-vertical-margin">
             <div className="big-font small-horizontal-padding">Choose a column to compare against median housing:</div>
             <Dropdown items={items} changed={this.changeSelectedData} selected={this.state.selectedColumn}/>
             </div>
 
-            <div id="graphs">
-                <XYChart height={300} xScale={{ type: 'band' }} yScale={{ type: 'linear' }}>
+            <div id="container" className="flex">
+            <div className={"flex " + (this.state.selectedColumn != "" ? "light-background" : "")}>
+                <XYChart width={1000} height={300} xScale={{ type: 'band' }} yScale={{ type: 'linear' }}>
                     <GlyphSeries dataKey="Scatterplot Data" data={this.state.currentData} {...accessors}/>
                     <Axis key={`axis-bottom`} label={this.state.selectedColumn.replaceAll("_", " ") + (units[this.state.selectedColumn] != null ? units[this.state.selectedColumn] : "")} orientation="bottom"/>
                     <Axis key={`axis-side`} label="Median House Value" orientation="left"/>
@@ -169,21 +171,24 @@ class Graph extends Component{
                             </div>
                         )}/>
                 </XYChart>
-                <XYChart height={300} xScale={{type: 'band'}} yScale={{type: 'linear'}}>
-                    <BarSeries dataKey="Histogram Data" data={this.state.bucketifiedData} {...accessors}/>
-                    <Axis key={`axis-bottom`} label={this.state.selectedColumn} orientation="bottom"/>
-                    <Axis key={`axis-side`} label="Occurences" orientation="left"/>
-                    <Tooltip
-                        showSeriesGlyphs
-                        renderTooltip={({tooltipData, _}) => (
-                                <div>
-                                    {'Value: '}
-                                    {accessors.xAccessor(tooltipData.nearestDatum.datum)}
-                                    {'\n Occurrences: '}
-                                    {accessors.yAccessor(tooltipData.nearestDatum.datum)}
-                                </div>
-                        )}/>
-                </XYChart>
+            </div>
+            <div className={"flex " + (this.state.selectedColumn != "" ? "light-background" : "")}>
+                <XYChart width={1000} height={300} xScale={{type: 'band'}} yScale={{type: 'linear'}}>
+                        <BarSeries dataKey="Histogram Data" data={this.state.bucketifiedData} {...accessors}/>
+                        <Axis key={`axis-bottom`} label={this.state.selectedColumn.replaceAll("_", " ") + (units[this.state.selectedColumn] != null ? units[this.state.selectedColumn] : "")} orientation="bottom"/>
+                        <Axis key={`axis-side`} label="Occurences" orientation="left"/>
+                        <Tooltip
+                            showSeriesGlyphs
+                            renderTooltip={({tooltipData, _}) => (
+                                    <div>
+                                        {'Value: '}
+                                        {accessors.xAccessor(tooltipData.nearestDatum.datum)}
+                                        {'\n Occurrences: '}
+                                        {accessors.yAccessor(tooltipData.nearestDatum.datum)}
+                                    </div>
+                            )}/>
+                    </XYChart>
+            </div>
             </div>
         </div>
     )}

@@ -43,8 +43,8 @@ h1 {
   text-align: center;
 }
 
-.small-margin-top {
-  margin-top: 1rem;
+.small-vertical-margin {
+  margin: 1rem 0;
 }
 
 input[type=number] {
