@@ -157,6 +157,7 @@ class Graph extends Component{
 
             <div id="container" className="flex">
             <div className={"flex " + (this.state.selectedColumn != "" ? "light-background" : "")}>
+                <div className={"title" + (this.state.selectedColumn == "" ? " hidden" : "")}>Median House Value vs. {this.state.selectedColumn.replaceAll("_", " ")}</div>
                 <XYChart width={1000} height={300} xScale={{ type: 'band' }} yScale={{ type: 'linear' }}>
                     <GlyphSeries dataKey="Scatterplot Data" data={this.state.currentData} {...accessors}/>
                     <Axis key={`axis-bottom`} label={this.state.selectedColumn.replaceAll("_", " ") + (units[this.state.selectedColumn] != null ? units[this.state.selectedColumn] : "")} orientation="bottom"/>
@@ -173,6 +174,7 @@ class Graph extends Component{
                 </XYChart>
             </div>
             <div className={"flex " + (this.state.selectedColumn != "" ? "light-background" : "")}>
+                <div className={"title" + (this.state.selectedColumn == "" ? " hidden" : "")}>Histogram of {this.state.selectedColumn.replaceAll("_", " ")}</div>
                 <XYChart width={1000} height={300} xScale={{type: 'band'}} yScale={{type: 'linear'}}>
                         <BarSeries dataKey="Histogram Data" data={this.state.bucketifiedData} {...accessors}/>
                         <Axis key={`axis-bottom`} label={this.state.selectedColumn.replaceAll("_", " ") + (units[this.state.selectedColumn] != null ? units[this.state.selectedColumn] : "")} orientation="bottom"/>
