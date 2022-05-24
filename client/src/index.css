@@ -43,8 +43,8 @@ h1 {
   text-align: center;
 }
 
-.small-margin-top {
-  margin-top: 1rem;
+.small-vertical-margin {
+  margin: 1rem 0;
 }
 
 input[type=number] {
@@ -61,6 +61,15 @@ button, input[type=submit] {
 
 button:hover, input[type=submit]:hover {
   background-color: #eeda89;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 0.3fr);
+}
+
+.align-self-center {
+  align-self: center;
 }
 
 /*
