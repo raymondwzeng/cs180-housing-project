@@ -55,9 +55,7 @@ class OperationsLayer {
 		if(!isLoaded) {
 			neighborhoodList = csv.load("./California_Houses.csv")
 			isLoaded = true
-			this.createMedianCaches();
-			this.createCloseCache();
-			this.createPopCache();
+			this.createCaches();
 		}
 	}
 
@@ -150,7 +148,12 @@ class OperationsLayer {
 			if(neighborhoodList[i].id == id){
 				//delete the neighborhood at index location i
 				csv.save(neighborhoodList, "California_Houses_Backup.csv");
-				this.updateCacheDelete(neighborhoodList[i]);
+				// Search caches for the deleted value and update them if needed
+				this.updateCacheDelete(neighborhoodList[i], highestValueCache);
+				this.updateCacheDelete(neighborhoodList[i], lowestValueCache);
+				this.updateCacheDelete(neighborhoodList[i], highestPopulationCache);
+				this.updateCacheDelete(neighborhoodList[i], closestCoastCache);
+
 				neighborhoodList.splice(i, 1);
 				return 0; // addNeighborhood successful.
 			}	
@@ -204,45 +207,22 @@ class OperationsLayer {
 		return -1; // addNeighborhood failed.
 	}
 
+	static createCaches() {
+		this.createMedianCaches();
+		this.createCloseCache();
+		this.createPopCache();
+	}
+
 	// Check to see if the cache needs to be updated, and do so
-	static updateCacheDelete(neighborhood) {
-		for(let i = 0; i < highestValueCache.length; i++) {
-			if(neighborhood.id == highestValueCache[i].id) {
-				highestValueCache.splice(i, 1); // Delete value from cache
+	static updateCacheDelete(neighborhood, cache) {
+		for(let i = 0; i < cache.length; i++) {
+			if(neighborhood.id == cache[i].id) {
+				cache.splice(i, 1); // Delete value from cache
 
-				if(highestValueCache.length < 10)
-					this.createMedianCaches();
-
-				break;
-			}
-		}
-		for(let i = 0; i < lowestValueCache.length; i++) {
-			if(neighborhood.id == lowestValueCache[i].id) {
-				lowestValueCache.splice(i, 1); // Delete value from cache
-
-				if(lowestValueCache.length < 10)
-					this.createMedianCaches();
-
-				break;
-			}
-		}
-		for(let i = 0; i < closestCoastCache.length; i++) {
-			if(neighborhood.id == closestCoastCache[i].id) {
-				closestCoastCache.splice(i, 1); // Delete value from cache
-
-				if(closestCoastCache.length < 10)
-					this.createCloseCache();
-
-				break;
-			}
-		}
-		for(let i = 0; i < highestPopulationCache.length; i++) {
-			if(neighborhood.id == highestPopulationCache[i].id) {
-				highestPopulationCache.splice(i, 1); // Delete value from cache
-
-				if(highestPopulationCache.length < 10)
-					this.createPopCache();
-
+				if(cache.length < 10) {
+					this.createCaches();
+				}
+					
 				break;
 			}
 		}
@@ -276,7 +256,10 @@ class OperationsLayer {
 	}
 
 	static updateCacheUpdate(neighborhood) {
-		this.updateCacheDelete(neighborhood);
+		this.updateCacheDelete(neighborhood, highestValueCache);
+		this.updateCacheDelete(neighborhood, lowestValueCache);
+		this.updateCacheDelete(neighborhood, highestPopulationCache);
+		this.updateCacheDelete(neighborhood, closestCoastCache);
 		this.updateCacheAdd(neighborhood);
 	}
 	
