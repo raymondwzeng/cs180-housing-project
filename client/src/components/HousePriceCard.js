@@ -39,6 +39,7 @@ class HousePriceCard extends Component {
                 <div id='keyInfo  factoidcard'>
                     <div id='homeValue factoidcard' >${this.props._median_value}</div>
                     <div id='aboutTheOwners'>Median income: ${(this.props._median_income * 10000).toPrecision(5)}</div>
+                    <div id='aboutTheNeighborhood'> ID: {this.props._id} </div>
                 </div>
                 <EditCard {...this.state} changeValue={this.changeValue} updateData={() => this.props.updateData(this.props._id, this.state)} deleteEntry={() => this.props.deleteEntry(this.props._id)}/>
         </div>
