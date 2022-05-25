@@ -36,6 +36,7 @@ class HousePriceCard extends Component {
 
     render() {
         return <div className="fcard card" key={this.props.key}>
+                <div id="ranking">{this.props.index}.</div>
                 <div id='keyInfo  factoidcard'>
                     <div id='homeValue factoidcard' >${this.props._median_value}</div>
                     <div id='aboutTheOwners'>Median income: ${(this.props._median_income * 10000).toPrecision(5)}</div>

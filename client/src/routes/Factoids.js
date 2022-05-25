@@ -75,32 +75,32 @@ render() {
             <div className="column-grow align-center">
                 <h3>By Highest Median House Price</h3>
                 {
-                    this.state.highestMedianValue.map(element => {
-                        return <HousePriceCard {...element} editingEnabled={false} />
+                    this.state.highestMedianValue.map((element, index) => {
+                        return <HousePriceCard {...element} editingEnabled={false} index={index+1} />
                     })
                 }
             </div>
             <div className="column-grow">
                 <h3>By Lowest Median House Price</h3>
                 {
-                    this.state.lowestMedianValue.map(element => {
-                        return <HousePriceCard {...element} editingEnabled={false} />
+                    this.state.lowestMedianValue.map((element, index) => {
+                        return <HousePriceCard {...element} editingEnabled={false} index={index+1}/>
                     })
                 }
             </div>
             <div className="column-grow">
                 <h3>By Closest Distance to Coast</h3>
                 {
-                    this.state.closestDistanceToCoast.map(element => {
-                        return <DistanceCard {...element} editingEnabled={false} />
+                    this.state.closestDistanceToCoast.map((element, index) => {
+                        return <DistanceCard {...element} editingEnabled={false} index={index+1}/>
                     })
                 }
             </div>
             <div className="column-grow">
                 <h3>By Highest Population</h3>
                 {
-                    this.state.highestPopulation.map(element => {
-                        return <PopulationCard {...element} editingEnabled={false} />
+                    this.state.highestPopulation.map((element, index) => {
+                        return <PopulationCard {...element} editingEnabled={false} index={index+1}/>
                     })
                 }
             </div>
