@@ -77,10 +77,18 @@
     background-color: #EDDEA4;
     margin: 0.7em 0;
     display: flex;
-    flex-direction: column;
-    gap: 0.2em;
+    flex-direction: row;
+    justify-content: space-between;
 }
 .fcard:hover {
     background-color: #F7A072;
     box-shadow: 0 0.2em 10px 0.2em rgb(187, 186, 186);
+}
+
+.fcard > #ranking{
+    font-weight: bold;
+}
+
+.fcard > #keyinfo{
+
 }
