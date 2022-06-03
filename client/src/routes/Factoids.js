@@ -6,6 +6,9 @@ import Navbar from "../components/navbar";
 import "./Factoids.css"
 import defaultHeaders from "../routes/Data.js"
 import Card from "../components/Card.js"
+import HousePriceCard from "../components/HousePriceCard.js"
+import PopulationCard from "../components/PopulationCard.js";
+import DistanceCard from "../components/DistanceCard.js";
 import { Component } from "react";
 
 export default class Factoids extends Component {
@@ -72,32 +75,32 @@ render() {
             <div className="column-grow align-center">
                 <h3>By Highest Median House Price</h3>
                 {
-                    this.state.highestMedianValue.map(element => {
-                        return <Card {...element} editingEnabled={false} />
+                    this.state.highestMedianValue.map((element, index) => {
+                        return <HousePriceCard {...element} editingEnabled={false} index={index+1} />
                     })
                 }
             </div>
             <div className="column-grow">
                 <h3>By Lowest Median House Price</h3>
                 {
-                    this.state.lowestMedianValue.map(element => {
-                        return <Card {...element} editingEnabled={false} />
+                    this.state.lowestMedianValue.map((element, index) => {
+                        return <HousePriceCard {...element} editingEnabled={false} index={index+1}/>
                     })
                 }
             </div>
             <div className="column-grow">
                 <h3>By Closest Distance to Coast</h3>
                 {
-                    this.state.closestDistanceToCoast.map(element => {
-                        return <Card {...element} editingEnabled={false} />
+                    this.state.closestDistanceToCoast.map((element, index) => {
+                        return <DistanceCard {...element} editingEnabled={false} index={index+1}/>
                     })
                 }
             </div>
             <div className="column-grow">
                 <h3>By Highest Population</h3>
                 {
-                    this.state.highestPopulation.map(element => {
-                        return <Card {...element} editingEnabled={false} />
+                    this.state.highestPopulation.map((element, index) => {
+                        return <PopulationCard {...element} editingEnabled={false} index={index+1}/>
                     })
                 }
             </div>
