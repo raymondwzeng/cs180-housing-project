@@ -138,7 +138,6 @@ function Data() {
         <Navbar />
       </div>
       <div className="page-contents">
-        {/* Two Sided Sliders for all of the data values*/}
         <div id='slider-container'>
           <div className="slider">
             <div className="slider-text">Median House Price: [{medianHousePrice[0]}, {medianHousePrice[1]}]</div>
@@ -200,10 +199,11 @@ function Data() {
             <div className="slider-text">ID: [{id[0]}, {id[1]}]</div>
             <TwoSidedSlider className="id-slider" min={minID} max={maxID} onChange={(id, _) => setID(id)}/>
           </div>
+          <div className='flex-horizontal' id="button-container">
+          <input className="button" type="submit" value="Show all data" onClick={fetchAllData}/>
+          <input className="button" type="submit" value="Show filtered data" onClick={() => fetchFilteredData(medianHousePrice, medianIncome, medianAge, totalRooms, totalBedrooms, population, households, latitude, longitude, distanceToCoast, distanceToLA, distanceToSD, distanceToSJ, distanceToSF, id)}/>
+          </div>
         </div>
-      <input className="button" type="submit" value="Show all data" onClick={fetchAllData}/>
-      <input className="button" type="submit" value="Show filtered data" onClick={() => fetchFilteredData(medianHousePrice, medianIncome, medianAge, totalRooms, totalBedrooms, population, households, latitude, longitude, distanceToCoast, distanceToLA, distanceToSD, distanceToSJ, distanceToSF, id)}/>
-      <p id="output"> Result from server</p>
       <div id='card-container'>
         <AddCard cardContainerSetter={setCardContainer}/>
         {tempCardContainer.map(element => {
@@ -263,9 +263,6 @@ async function fetchFilteredData(medianHousePrice, medianIncome, medianAge, tota
 }
 
 async function displayAllData(response) {
-  var mainContainer = document.getElementById("output");
-  mainContainer.innerText = "";
-
   let tempCardContainer = []; //Empty out the cardContainer before injecting new data
 
   for (var i = 0; i < response.length; i++) {

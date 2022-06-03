@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { defaultHeaders } from "../routes/Data";
 import EditAttributes from "./EditAttributes";
+import "./AddCard.css"
 
 class AddCard extends Component {
     constructor(props) {
@@ -56,7 +57,7 @@ class AddCard extends Component {
 
     render() {
         return (
-            <div className="card">
+            <div id="add-card" className="card">
                 <div onClick={this.toggleState} className={this.state.isEnabled ? `hidden` : `visible`}>Add a new entry...</div>
                 <div className={this.state.isEnabled ? `visible` : `hidden`}>
                     <EditAttributes {...this.state} onChange={(e) => this.changeValue(e.target.id, e.target.value)}/>
