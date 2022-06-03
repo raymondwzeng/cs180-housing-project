@@ -4,18 +4,7 @@
 }
 
 .card {
-    width: 80%;
-    margin-left: 20px auto;
-    margin-right: 20px auto;
-}
-
-.main-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.factoid-container {
-    width: 1350px;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
 }
