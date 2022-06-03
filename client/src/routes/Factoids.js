@@ -5,7 +5,6 @@ Factoids page! Should contain some interesting answers to some questions we want
 import Navbar from "../components/navbar";
 import "./Factoids.css"
 import defaultHeaders from "../routes/Data.js"
-import Card from "../components/Card.js"
 import HousePriceCard from "../components/HousePriceCard.js"
 import PopulationCard from "../components/PopulationCard.js";
 import DistanceCard from "../components/DistanceCard.js";
@@ -68,41 +67,46 @@ export default class Factoids extends Component {
     }
 
 render() {
-    return (<div>
+    return (
+    <div>
         <Navbar />
-        <h2>Top 10 Neighborhoods...</h2>
-        <div id="3-questions-answered" className="flex-horizontal">
-            <div className="column-grow align-center">
-                <h3>By Highest Median House Price</h3>
-                {
-                    this.state.highestMedianValue.map((element, index) => {
-                        return <HousePriceCard {...element} editingEnabled={false} index={index+1} />
-                    })
-                }
-            </div>
-            <div className="column-grow">
-                <h3>By Lowest Median House Price</h3>
-                {
-                    this.state.lowestMedianValue.map((element, index) => {
-                        return <HousePriceCard {...element} editingEnabled={false} index={index+1}/>
-                    })
-                }
-            </div>
-            <div className="column-grow">
-                <h3>By Closest Distance to Coast</h3>
-                {
-                    this.state.closestDistanceToCoast.map((element, index) => {
-                        return <DistanceCard {...element} editingEnabled={false} index={index+1}/>
-                    })
-                }
-            </div>
-            <div className="column-grow">
-                <h3>By Highest Population</h3>
-                {
-                    this.state.highestPopulation.map((element, index) => {
-                        return <PopulationCard {...element} editingEnabled={false} index={index+1}/>
-                    })
-                }
+        <div className="main-content">
+            <h2>Top 10 Neighborhoods...</h2>
+            <div className="factoid-container">
+                <div id="3-questions-answered" className="flex-horizontal">
+                    <div className="factoid-container align-center">
+                        <h3>By Highest Median House Price</h3>
+                        {
+                            this.state.highestMedianValue.map((element, index) => {
+                                return <HousePriceCard {...element} editingEnabled={false} index={index+1} />
+                            })
+                        }
+                    </div>
+                    <div className="factoid-container">
+                        <h3>By Lowest Median House Price</h3>
+                        {
+                            this.state.lowestMedianValue.map((element, index) => {
+                                return <HousePriceCard {...element} editingEnabled={false} index={index+1}/>
+                            })
+                        }
+                    </div>
+                    <div className="factoid-container">
+                        <h3>By Closest Distance to Coast</h3>
+                        {
+                            this.state.closestDistanceToCoast.map((element, index) => {
+                                return <DistanceCard {...element} editingEnabled={false} index={index+1}/>
+                            })
+                        }
+                    </div>
+                    <div className="factoid-container">
+                        <h3>By Highest Population</h3>
+                        {
+                            this.state.highestPopulation.map((element, index) => {
+                                return <PopulationCard {...element} editingEnabled={false} index={index+1}/>
+                            })
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     </div>)
